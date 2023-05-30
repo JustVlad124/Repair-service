@@ -1,0 +1,58 @@
+<header class="main-header">
+    <div class="header-container">
+        <div class="header-col">
+            <a href="{{ path('app_main_page') }}" class="main-site-header-logo">LOGO</a>
+            <div class="main-site-location-bar">
+                <div class="header-loc-curr-city">
+                    <button>
+                        <span>Москва</span>
+                        <img
+                                src="{{ asset('build/images/down-arrow-backup-2-svgrepo-com.9152d6b1.svg') }}"
+                                alt="dowm arrow"
+                                width="14px"
+                                height="14px"
+                        />
+                    </button>
+                </div>
+                <div class="header-loc-list"></div>
+            </div>
+        </div>
+        <div class="header-col">
+{#            {% if not is_granted('ROLE_SPECIALIST') %}#}
+{#                <div class="main-site-header-spec-auth">#}
+{#                    <button>#}
+{#                        <span>Специалистам</span>#}
+{#                        <img#}
+{#                                src="{{ asset('build/images/down-arrow-backup-2-svgrepo-com.9152d6b1.svg') }}"#}
+{#                                alt="down arrow"#}
+{#                                width="14px"#}
+{#                                height="14px"#}
+{#                        />#}
+{#                    </button>#}
+
+{#                    <div class="spec-reg-login">#}
+{#                        <a href="{{ path('app_specialist_register') }}">Регистрация специалистов</a>#}
+{#                        <a href="{{ path('app_specialist_login') }}">Вход для специалистов</a>#}
+{#                    </div>#}
+
+{#                </div>#}
+{#            {% endif %}#}
+            <div class="main-site-header-client-auth">
+                <div class="signBtn">
+{#                    <a href="{{ app.user ? path('app_main_page') : path('app_login') }}">#}
+{#                        <span>{{ app.user ? app.user.email : 'Войти' }}</span>#}
+{#                    </a>#}
+                    <a href="">Log In</a>
+                </div>
+
+                {% if app.user  %}
+                    <div class="auth-user-nav">
+                        <a href="">Мои заказы</a>
+                        <a href="">Профиль</a>
+                        <a class="logout" href="">Выйти</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>

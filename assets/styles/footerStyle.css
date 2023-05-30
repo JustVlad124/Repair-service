@@ -1,0 +1,52 @@
+.main-footer {
+    flex-shrink: 0;
+    background-color: var(--bc-main-footer);
+    width: 100%;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.footer-logo a {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.footer-col {
+    flex: 1;
+}
+
+.footer-col ul {
+    list-style: none;
+    font-size: 1.1em;
+}
+
+.footer-col ul li {
+    margin-bottom: 1rem;
+}
+
+.footer-col a:hover {
+    color: rgb(230, 20, 20);
+}
+
+.footer-contact-info-para {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.footer-col section span {
+    display: block;
+    padding: 0.5rem 0 1rem;
+}

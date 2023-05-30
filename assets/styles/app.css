@@ -1,0 +1,63 @@
+@import "headerStyle.css";
+@import "footerStyle.css";
+@import "mainStyle.css";
+@import "regAndAuthStyle.css";
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+:root {
+    --bc-main: #f7f7f7;
+    --bc-main-hover: #eee;
+    --bc-main-footer: #eee;
+    --fc-a-link: #c00000;
+    --fc-a-hover: red;
+    --btn-col: rgb(230, 20, 20);
+    --btn-col-hover: rgb(190, 7, 7);
+    --input-color: #ddd;
+    --input-color-hover: #b7b7b7;
+    --button-fs: 1.1rem;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    /* height: 3000px; */
+    font-family: 'Heebo', sans-serif;
+    background-color: var(--bc-main);
+}
+
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:focus {
+    outline: none;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+}

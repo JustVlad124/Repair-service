@@ -1,0 +1,90 @@
+.form-main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.form-main .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 0;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: .6rem;
+    box-shadow: 1px 0 30px rgba(0, 0, 0, 0.1);
+    width: 40%;
+}
+
+.auth-form-header {
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 1px solid #aaa;
+}
+
+.auth-form-header span {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.auth-form-main-section {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    font-size: 1.1rem;
+}
+
+.auth-form-main-section div {
+    display: flex;
+    flex-direction: column;
+    margin: .5rem 0;
+}
+
+.auth-form-main-section div label {
+    margin-bottom: .3rem;
+}
+
+.auth-form-main-section input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .6rem;
+    padding: .4rem .6rem;
+    font-size: inherit;
+}
+
+.auth-form-main-section button {
+    font-size: 1.1rem;
+    color: var(--bc-main);
+    padding: .6rem 0;
+    margin-top: 1.2rem;
+    border: none;
+    border-radius: .6rem;
+    background-color: var(--btn-col);
+}
+
+.auth-form-main-section button:hover {
+    background-color: var(--btn-col-hover);
+}
+
+.auth-form-main-section button:focus {
+    outline: none;
+}
+
+.auth-form-footer {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid #aaa;
+}
+
+.auth-form-footer a {
+    color: var(--fc-a-link);
+}
+
+.auth-form-footer a:hover {
+    color: var(--fc-a-hover);
+}

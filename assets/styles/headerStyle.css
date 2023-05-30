@@ -1,0 +1,130 @@
+.main-header {
+    width: 100%;
+    background-color: var(--bc-main);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    height: 4rem;
+}
+
+.logout {
+    color: var(--fc-a-link);
+}
+
+.logout:hover {
+    color: var(--fc-a-hover);
+}
+
+.header-col {
+    display: flex;
+    align-items: center;
+}
+
+.main-site-header-logo {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.main-site-header-logo:focus {
+    outline: none;
+}
+
+.main-site-location-bar {
+    margin-left: 2rem;
+}
+
+.main-site-header-spec-auth {
+    position: relative;
+}
+
+.main-header img {
+    margin-left: .4rem;
+}
+
+.main-header button {
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    border: none;
+    padding: 0.6rem 1.3rem;
+    font-size: var(--button-fs);
+    background-color: var(--bc-main);
+}
+
+.main-header button:hover {
+    background-color: var(--bc-main-hover);
+    cursor: pointer;
+}
+
+.main-header button:focus {
+    outline: none;
+}
+
+.main-site-header-client-auth {
+    position: relative;
+}
+
+.signBtn {
+    min-width: 80px;
+    border-radius: .5rem;
+    padding: 0.4rem 1.2rem;
+    font-size: var(--button-fs);
+    text-align: center;
+}
+
+.signBtn:hover {
+    background-color: var(--bc-main-hover);
+    cursor: pointer;
+}
+
+.auth-user-nav {
+    position: absolute;
+    width: 150px;
+    padding: 5px;
+    display: flex;
+    flex-flow: column wrap;
+    border-radius: .6rem;
+    background-color: white;
+    visibility: hidden;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+.auth-user-nav a {
+    padding: .6rem 1rem;
+    margin: 1px 0;
+    border-radius: .6rem;
+}
+
+.auth-user-nav a:hover {
+    background-color: var(--bc-main-hover);
+}
+
+.spec-reg-login {
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-flow: column wrap;
+    border-radius: .5rem;
+    position: absolute;
+    top: 40px;
+    min-width: 250px;
+    background-color: #fff;
+    padding: 5px;
+    visibility: hidden;
+}
+
+.spec-reg-login a {
+    padding: 0.6rem 1.3rem;
+}
+
+.spec-reg-login a:hover {
+    background-color: #eee;
+    border-radius: 0.5rem;
+}
