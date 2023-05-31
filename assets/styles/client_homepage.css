@@ -1,0 +1,128 @@
+.user-profile-main {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 5.5rem;
+    flex: 1 0 auto;
+}
+
+.user-profile-content {
+    display: grid;
+    grid-template-columns: 2fr 11fr;
+    gap: 1rem;
+}
+
+.user-nav ul {
+    list-style: none;
+}
+
+.user-nav ul li {
+    padding: .6rem 1rem;
+    border-radius: .6rem;
+}
+
+.user-nav ul li:hover {
+    cursor: pointer;
+}
+
+.user-nav a:hover {
+    text-decoration: underline;
+}
+
+.user-nav .logout {
+    color: var(--fc-a-link);
+}
+
+.user-nav .logout:hover {
+    color: var(--fc-a-hover);
+}
+
+.client-homapage-nav-orders-section summary {
+    margin-bottom: 0;
+}
+
+.client-homapage-nav-orders-section ul {
+    margin-top: .5rem;
+    margin-left: .5rem;
+}
+
+.client-homepage-main-section h1 {
+    margin-bottom: 1.5rem;
+}
+
+.client-homepage-main-section-navbar {
+    margin: 1rem 0 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.client-homepage-main-section-navbar button {
+    border: 1px solid #ddd;
+    border-radius: .6rem;
+    width: 100%;
+    padding: .6rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.client-homepage-main-section-navbar .btn-active {
+    background-color: #bebebe;
+    cursor: default;
+}
+
+.client-homepage-main-section-navbar button:hover {
+    background-color: var(--input-color-hover);
+}
+
+.order-list {
+    width: 100%;
+    padding: 1rem 0;
+    display: none;
+}
+
+.order-list-show {
+    display: block;
+}
+
+.order-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: wrap;
+    width: 93.5%;
+    padding: 1rem 2rem;
+    margin-bottom: .6rem;
+    border: 1px solid #ddd;
+    border-radius: .6rem;
+}
+
+.order-tab > h2 {
+    width: 100%;
+}
+
+.order-tab div :nth-child(2) {
+    display: flex;
+}
+
+.order-info {
+    color: var(--fc-a-link);
+    text-decoration: underline;
+    width: max-content;
+}
+
+.order-info:hover {
+    color: var(--fc-a-hover);
+}
+
+.order-cancel-btn {
+    color: white;
+    font-size: 1rem;
+    padding: .6rem 1rem;
+    border: none;
+    border-radius: .6rem;
+    background-color: var(--btn-col);
+}
+
+.order-cancel-btn:hover {
+    background-color: var(--btn-col-hover);
+}

@@ -27,7 +27,7 @@
 
                 {% if app.user  %}
                     <div class="auth-user-nav">
-                        <a href="">Мои заказы</a>
+                        <a href="{{ path('app_client_homepage') }}">Мои заказы</a>
                         <a href="">Профиль</a>
                         <a class="logout" href="{{ path('app_logout') }}">Выйти</a>
                     </div>

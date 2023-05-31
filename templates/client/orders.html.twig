@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ClientController!{% endblock %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside>
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="">Новый заказ</a></li>
+                            <li><a href="">Мои заказы</a></li>
+                            <li><a href="">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="client-homepage-main-section">
+                    <h1>Мои заказы</h1>
+                    <nav class="client-homepage-main-section-navbar">
+                        <button type="button" class="tabs-btn">В очереди</button>
+                        <button type="button" class="tabs-btn">В процессе</button>
+                        <button type="button" class="tabs-btn">Архив</button>
+                    </nav>
+                    <div class="order-tabs-content">
+                        <div class="order-list" id="pending">
+                            <div class="order-tab">
+                                <h2>Замена труб в ванной комнате</h2>
+                                <div>
+                                    <a href="" class="order-info">Детали заказа</a>
+                                    <p>22.04.2023</p>
+                                </div>
+                                <div>
+                                    <a href="">Подобрать специалиста</a>
+                                    <a href="">Отклики от специалистов</a>
+                                </div>
+                                <div>
+                                    <button type="button" class="order-cancel-btn">
+                                        Отменить заказ
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="order-tab">
+                                <h2>Облицовка плиткой ванной комнаты</h2>
+                                <div>
+                                    {#                                    <h2>Облицовка плиткой ванной комнаты</h2>#}
+                                    <a href="" class="order-info">Детали заказа</a>
+                                    <p>21.04.2023</p>
+                                </div>
+                                <div>
+                                    <a href="">Подобрать специалиста</a>
+                                    <a href="">Отклики от специалистов</a>
+                                </div>
+                                <div>
+                                    <button type="button" class="order-cancel-btn">
+                                        Отменить заказ
+                                    </button>
+                                </div>
+                            </div>
+                            {#                            <div class="order-tab">#}
+                            {#                                <div>#}
+                            {#                                    <h2>Замена труб</h2>#}
+                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
+                            {#                                    <p>21.04.2023</p>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <a href="">Подобрать специалиста</a>#}
+                            {#                                    <a href="">Отклики от специалистов</a>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <button type="button" class="order-cancel-btn">#}
+                            {#                                        Отменить заказ#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                        </div>
+                        <div class="order-list" id="inProgress">
+                            <div class="order-tab">
+                                <h2>Замена труб в ванной комнате</h2>
+                                <div>
+                                    <a href="" class="order-info">Детали заказа</a>
+                                    <p>22.04.2023</p>
+                                </div>
+                                <div>
+                                    <a href="" style="color: #3b82f6">Иванов Иван Иванович</a>
+                                </div>
+                                <div>
+                                    <button type="button" class="order-cancel-btn">
+                                        Отменить заказ
+                                    </button>
+                                </div>
+                            </div>
+                            {#                            <div class="order-tab">#}
+                            {#                                <div>#}
+                            {#                                    <h2>В процессе</h2>#}
+                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
+                            {#                                    <p>дата создания заказа</p>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <a href="">Подобрать специалиста</a>#}
+                            {#                                    <a href="">Отклики от специалистов</a>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <button type="button" class="order-cancel-btn">#}
+                            {#                                        Отменить заказ#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="order-tab">#}
+                            {#                                <div>#}
+                            {#                                    <h2>В процессе</h2>#}
+                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
+                            {#                                    <p>дата создания заказа</p>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <a href="">Подобрать специалиста</a>#}
+                            {#                                    <a href="">Отклики от специалистов</a>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <button type="button" class="order-cancel-btn">#}
+                            {#                                        Отменить заказ#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                        </div>
+                        <div class="order-list" id="archive">
+                            <div class="order-tab">
+                                <h2>Замена труб в ванной комнате</h2>
+                                <div>
+                                    <a href="" class="order-info">Детали заказа</a>
+                                    <p>22.04.2023</p>
+                                </div>
+                                <div>
+                                    <a href="" style="color: #3b82f6">Иванов Иван Иванович</a>
+                                </div>
+                                <div>
+                                    {#                                    <button type="button" class="order-cancel-btn">#}
+                                    {#                                        Отменить заказ#}
+                                    {#                                    </button>#}
+                                </div>
+                            </div>
+                            {#                            <div class="order-tab">#}
+                            {#                                <div>#}
+                            {#                                    <h2>В архиве</h2>#}
+                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
+                            {#                                    <p>дата создания заказа</p>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <a href="">Подобрать специалиста</a>#}
+                            {#                                    <a href="">Отклики от специалистов</a>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <button type="button" class="order-cancel-btn">#}
+                            {#                                        Отменить заказ#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="order-tab">#}
+                            {#                                <div>#}
+                            {#                                    <h2>В архиве</h2>#}
+                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
+                            {#                                    <p>дата создания заказа</p>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <a href="">Подобрать специалиста</a>#}
+                            {#                                    <a href="">Отклики от специалистов</a>#}
+                            {#                                </div>#}
+                            {#                                <div>#}
+                            {#                                    <button type="button" class="order-cancel-btn">#}
+                            {#                                        Отменить заказ#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

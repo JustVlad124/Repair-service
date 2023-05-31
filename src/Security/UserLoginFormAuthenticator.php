@@ -50,13 +50,15 @@ class UserLoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-//        $userEmail = $request->request->get('email');
-//
-//        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $userEmail]);
-//
-//        if (in_array('ROLE_USER', $user->getRoles(), true)) {
-//            return new Response('This is user part');
-//        }
+        $userEmail = $request->request->get('email');
+
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $userEmail]);
+
+        if (in_array('ROLE_USER', $user->getRoles(), true)) {
+            return new RedirectResponse($this->urlGenerator->generate('app_client_homepage'));
+        } elseif (in_array('ROLE_SPECIALIST', $user->getRoles(), true)) {
+            return new Response('This is specialist part');
+        }
         
         return new RedirectResponse($this->urlGenerator->generate('app_main_page'));
     }

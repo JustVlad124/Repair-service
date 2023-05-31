@@ -9,3 +9,5 @@
 import './styles/app.css';
 
 import './javascripts/script1';
+
+import './javascripts/orderTabsHandler';
