@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <main class="form-main">
+        <div class="container">
+            {{ form_start(registrationForm, {attr: {'class': 'auth-form'}}) }}
+                <header class="auth-form-header">
+                    <span>Вход и регистрация</span>
+                </header>
+                <main class="auth-form-main-section">
+                    <div>
+                        {{ form_row(registrationForm.email) }}
+                    </div>
+                    <div>
+                        {{ form_row(registrationForm.plainPassword) }}
+                    </div>
+                    <div>
+                        {{ form_row(registrationForm.roles, {attr: {'class': 'role-choice'}}) }}
+                    </div>
+                    <button type="submit">Зарегистрироваться</button>
+                </main>
+                <footer class="auth-form-footer">
+                      <span
+                      >У вас уже есть аккаунт?
+                        <a href="{{ path('app_login') }}">Авторизируйтесь</a>.</span
+                      >
+                </footer>
+            {{ form_end(registrationForm) }}
+        </div>
+    </main>
+{% endblock %}
+

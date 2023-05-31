@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
 {
+    public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_SPECIALIST = 'ROLE_SPECIALIST';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,8 +24,12 @@ class Role
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'roles')]
     private Collection $users;
 
-    public function __construct()
+    public function __construct(string $roleName = null)
     {
+        if ($roleName) {
+            $this->roleName = $roleName;
+        }
+
         $this->users = new ArrayCollection();
     }
 

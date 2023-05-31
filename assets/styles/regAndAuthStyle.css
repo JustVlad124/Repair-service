@@ -88,3 +88,11 @@
 .auth-form-footer a:hover {
     color: var(--fc-a-hover);
 }
+
+.role-choice {
+    padding: .6rem 1rem;
+    font-size: 1.1rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .6rem;
+    background-color: white;
+}

@@ -2,6 +2,9 @@
 
 namespace App\Security;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +24,8 @@ class UserLoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator,
+                                private EntityManagerInterface $entityManager)
     {
     }
 
@@ -45,6 +49,14 @@ class UserLoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
+//        $userEmail = $request->request->get('email');
+//
+//        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $userEmail]);
+//
+//        if (in_array('ROLE_USER', $user->getRoles(), true)) {
+//            return new Response('This is user part');
+//        }
         
         return new RedirectResponse($this->urlGenerator->generate('app_main_page'));
     }
