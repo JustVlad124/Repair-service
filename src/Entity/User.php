@@ -30,8 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'users')]
     private Collection $roles;
 
+//    private ?array $roles = [];
+
+
+
     public function __construct()
     {
+//        $this->roles = ['ROLE_ADMIN'];
         $this->roles = new ArrayCollection();
     }
 
@@ -67,7 +72,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        return $this->roles->toArray();
+        $arrRolesString = [];
+
+        foreach ($this->roles as $role) {
+            $arrRolesString[] = (string)$role;
+        }
+
+        return $arrRolesString;
     }
 
     public function setRoles(Collection $roles): self

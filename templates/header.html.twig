@@ -39,17 +39,16 @@
 {#            {% endif %}#}
             <div class="main-site-header-client-auth">
                 <div class="signBtn">
-{#                    <a href="{{ app.user ? path('app_main_page') : path('app_login') }}">#}
-{#                        <span>{{ app.user ? app.user.email : 'Войти' }}</span>#}
-{#                    </a>#}
-                    <a href="">Log In</a>
+                    <a href="{{ app.user ? path('app_main_page') : path('app_login') }}">
+                        <span>{{ app.user ? app.user.email : 'Войти' }}</span>
+                    </a>
                 </div>
 
                 {% if app.user  %}
                     <div class="auth-user-nav">
                         <a href="">Мои заказы</a>
                         <a href="">Профиль</a>
-                        <a class="logout" href="">Выйти</a>
+                        <a class="logout" href="{{ path('app_logout') }}">Выйти</a>
                     </div>
                 {% endif %}
             </div>
