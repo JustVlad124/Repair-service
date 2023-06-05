@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="margin-top: 100px;">
+        <h1>This is one order info</h1>
+        <p>{{ order.id }}</p>
+        <p>{{ order.orderName }}</p>
+        <p>{{ order.description }}</p>
+        <p>{{ order.cost }}</p>
+    </div>
+    <a href="{{ path('app_client_delete_order', { id: order.id }) }}">delete order</a>
+{% endblock %}

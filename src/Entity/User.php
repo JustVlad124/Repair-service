@@ -21,21 +21,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    protected ?string $email = null;
 
     /**
      * @var ?string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    protected ?string $password = null;
 
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'users')]
-    private Collection $roles;
+    protected Collection $roles;
+
+//    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
+//    private Collection $orders;
 
 
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,4 +130,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Order>
+     */
+//    public function getOrders(): Collection
+//    {
+//        return $this->orders;
+//    }
+//
+//    public function addOrder(Order $order): self
+//    {
+//        if (!$this->orders->contains($order)) {
+//            $this->orders->add($order);
+//            $order->setUser($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeOrder(Order $order): self
+//    {
+//        if ($this->orders->removeElement($order)) {
+//            // set the owning side to null (unless already changed)
+//            if ($order->getUser() === $this) {
+//                $order->setUser(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 }

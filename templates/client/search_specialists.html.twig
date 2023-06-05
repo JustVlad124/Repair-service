@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside>
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_client_show_order', { id: order.id }) }}">Мой заказ</a></li>
+                            <li><a href="">Список заказов</a></li>
+                            <li><a href="">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="client-homepage-main-section">
+                    <h1>Список специалистов</h1>
+                    <div class="spec-list">
+                        {% for specialist in specialists %}
+                            <div class="spec-item">
+                                <div>
+                                    <header>
+                                        <div class="spec-profile-img">
+                                            <img src="{{ asset('build/images/profile-placeholder.16b74247.png') }}" alt="specialist profile picture">
+                                        </div>
+                                        <div class="spec-profile-header">
+                                            <p class="spec-name"><a href="">{{ specialist.userId.email  }}</a></p>
+                                            <p class="spec-spec">Сантехника</p>
+                                        </div>
+                                    </header>
+                                    <main>
+                                        {#                                    <div class="portfolio-section">#}
+                                        {#                                        <p>Here suppose to be portfolio section</p>#}
+                                        {#                                    </div>#}
+                                        <div class="spec-review-section">
+                                            <h2>Отзывы</h2>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Cumque illum magni quae? Alias aliquid animi commodi culpa cum debitis,
+                                                distinctio esse eveniet, exercitationem, id itaque iusto nam odio quia voluptas.
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Aperiam atque ducimus excepturi facilis pariatur placeat vel.
+                                                At dolorem doloribus, ex ipsam magnam maxime minus mollitia, praesentium quae quasi, sequi suscipit?
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Ad incidunt minima modi odit repellendus velit, voluptatibus.
+                                                Ad deserunt expedita, illo impedit in labore quam recusandae rerum sequi ullam? Alias, cumque.
+                                            </p>
+                                            {#                                    Эта ссылка ведет на анкету специалиста (можно сделать якорь на конкретную секцию )#}
+                                            <a href="">Показать все отзывы</a>
+                                        </div>
+                                        <div class="spec-services">
+                                            <h2>Категория услуг</h2>
+                                            <ul>
+                                                <li>Услуга 1....................2000 рб/час</li>
+                                                <li>Услуга 2....................1500 рб/час</li>
+                                            </ul>
+                                            <a href="">Показать все услуги</a>
+                                        </div>
+                                    </main>
+                                </div>
+                                <aside class="spec-aside-bar">
+                                    <button type="button">
+                                        Предложить заказ
+                                    </button>
+                                    <div class="spec-rating">
+                                        <p><span>5,0</span>Рейтинг</p>
+                                        <p><span>33</span>Отзыва</p>
+                                    </div>
+                                    <p class="spec-location" style="margin-bottom: 1rem;">Местоположение</p>
+                                    <p>Москва</p>
+                                </aside>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}
