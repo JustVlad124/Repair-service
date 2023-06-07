@@ -1,12 +1,61 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Client order information {% endblock %}
+
 {% block body %}
-    <div style="margin-top: 100px;">
-        <h1>This is one order info</h1>
-        <p>{{ order.id }}</p>
-        <p>{{ order.orderName }}</p>
-        <p>{{ order.description }}</p>
-        <p>{{ order.cost }}</p>
-    </div>
-    <a href="{{ path('app_client_delete_order', { id: order.id }) }}">delete order</a>
-{% endblock %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside>
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
+                            <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="client-profile-content">
+                    <header class="order-header-info">
+                        <h1>Мой заказ</h1>
+                        <div>
+                            <p>Номер заказа: №{{ order.id }}</p>
+                            <p>Дата создания заказа: 22.04.2023</p>
+                        </div>
+                    </header>
+                    <main class="order-main-info">
+                        <h2>Название вашего заказа</h2>
+                        <p>{{ order.orderName }}</p>
+                        <h2>Услуги</h2>
+                        <section class="order-main-info-service">
+                            <h3>Сантехника</h3>
+                            <ul>
+                                <li>Установка или замена сантехники</li>
+                                {#                                <li>Услуга №2</li>#}
+                                {#                                <li>Услуга №3</li>#}
+                            </ul>
+                        </section>
+                        <h2>Где будут проводиться работы?</h2>
+                        <p>Московская обл., Москва, Никольская 7, кв. 12</p>
+                        <h2>Когда будет удобно начать работу?</h2>
+                        <p>22.04.2023</p>
+                        <h2>Детали заказа</h2>
+                        <p>
+                            Нужно заменить трубу под ванной.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Aliquam ducimus fugit iste magni minima modi nemo officia perferendis ratione reiciendis,
+                            repellendus repudiandae sequi ullam voluptate voluptatem! Dolorum maiores obcaecati repellat.
+                        </p>
+                        <h2>Ожидаемая стоимость</h2>
+                        <p>3000 руб.</p>
+                    </main>
+                    <footer>
+                        <a href="{{ path('app_client_delete_order', {'id': order.id }) }}" class="delete_order_btn">Отменить заказ</a>
+                        <a href="{{ path('app_client_update_order', { 'id': order.id }) }}" class="update_order_btn">Редактировать заказ</a>
+                    </footer>
+                </main>
+            </div>
+        </div>
+    </main>
+{%  endblock %}

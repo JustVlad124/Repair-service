@@ -8,8 +8,8 @@
                     <nav class="user-nav">
                         <ul>
                             <li><a href="{{ path('app_client_show_order', { id: order.id }) }}">Мой заказ</a></li>
-                            <li><a href="">Список заказов</a></li>
-                            <li><a href="">Профиль</a></li>
+                            <li><a href="{{ path('app_client_homepage') }}">Список заказов</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -25,7 +25,9 @@
                                             <img src="{{ asset('build/images/profile-placeholder.16b74247.png') }}" alt="specialist profile picture">
                                         </div>
                                         <div class="spec-profile-header">
-                                            <p class="spec-name"><a href="">{{ specialist.userId.email  }}</a></p>
+                                            <p class="spec-name">
+                                                <a href="{{ path('app_client_specialist_profile', { id: specialist.id }) }}">{{ specialist.userId.email }}</a>
+                                            </p>
                                             <p class="spec-spec">Сантехника</p>
                                         </div>
                                     </header>
@@ -50,19 +52,33 @@
                                             <a href="">Показать все отзывы</a>
                                         </div>
                                         <div class="spec-services">
-                                            <h2>Категория услуг</h2>
-                                            <ul>
-                                                <li>Услуга 1....................2000 рб/час</li>
-                                                <li>Услуга 2....................1500 рб/час</li>
-                                            </ul>
+                                            <h2>Предоставляемые услуги</h2>
+                                            <table class="spec-services-table">
+                                                <tbody>
+                                                    <tr style="display: block; margin-bottom: .6rem; font-size: 1.1rem; font-weight: bold;">Сантехника</tr>
+                                                    <tr>
+                                                        <td class="item_name">Услуга</td>
+                                                        <td class="item_value">3000 рб/кв.м</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="item_name">Услуга</td>
+                                                        <td class="item_value">3000 рб/кв.м</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                             <a href="">Показать все услуги</a>
                                         </div>
                                     </main>
                                 </div>
                                 <aside class="spec-aside-bar">
-                                    <button type="button">
-                                        Предложить заказ
-                                    </button>
+
+                                    <form action="{{ path('app_client_available_specialists', { id: order.id }) }}" method="post">
+                                        <input type="hidden" name="specialist_id" value="{{ specialist.id }}">
+                                        <button type="submit">
+                                            Предложить заказ
+                                        </button>
+                                    </form>
+
                                     <div class="spec-rating">
                                         <p><span>5,0</span>Рейтинг</p>
                                         <p><span>33</span>Отзыва</p>

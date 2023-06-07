@@ -4,6 +4,11 @@
 @import "regAndAuthStyle.css";
 @import "client_homepage.css";
 @import "specOrderListProfileStyle.css";
+@import "specProfileStyle.css";
+@import "specOrdersStyle.css";
+@import "specNewOrderStyle.css";
+@import "clientProfile.css";
+@import "clientOrder.css";
 
 *,
 *::after,

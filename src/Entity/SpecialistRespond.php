@@ -6,7 +6,7 @@ use App\Repository\RespondRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RespondRepository::class)]
-class Respond
+class SpecialistRespond
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,7 +14,7 @@ class Respond
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'responds')]
-    private ?Order $order_id = null;
+    private ?Order $order = null;
 
     #[ORM\ManyToOne(inversedBy: 'responds')]
     private ?Specialist $specialist = null;
@@ -26,12 +26,12 @@ class Respond
 
     public function getOrderId(): ?Order
     {
-        return $this->order_id;
+        return $this->order;
     }
 
     public function setOrderId(?Order $order_id): self
     {
-        $this->order_id = $order_id;
+        $this->order = $order_id;
 
         return $this;
     }

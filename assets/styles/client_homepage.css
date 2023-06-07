@@ -94,35 +94,114 @@
     margin-bottom: .6rem;
     border: 1px solid #ddd;
     border-radius: .6rem;
+    box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.1);
 }
 
 .order-tab > h2 {
     width: 100%;
 }
 
-.order-tab div :nth-child(2) {
+.order-tab > h2 a {
+    color: #3b82f6;
+    cursor: pointer;
+}
+
+.order-tab > h2 a:hover {
+    color: #5aa1f6;
+    text-decoration: underline;
+}
+
+.order-tab div:last-child {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.order-tab div:last-child :first-child {
+    margin-bottom: .6rem;
+}
+
+.order-tab div :nth-child(2) {
+
+    display: flex;
+}
+
+.order-tab-button-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-tab-button-section > a:last-child {
+    color: #3b82f6;
+    cursor: pointer;
+}
+
+.order-tab-button-section > a:last-child:hover {
+    color: #5aa1f6;
+    text-decoration: underline;
 }
 
 .order-info {
     color: var(--fc-a-link);
-    text-decoration: underline;
     width: max-content;
 }
 
 .order-info:hover {
     color: var(--fc-a-hover);
+    text-decoration: underline;
 }
 
 .order-cancel-btn {
+    text-align: center;
     color: white;
     font-size: 1rem;
     padding: .6rem 1rem;
     border: none;
     border-radius: .6rem;
     background-color: var(--btn-col);
+    margin-bottom: .6rem;
 }
 
 .order-cancel-btn:hover {
     background-color: var(--btn-col-hover);
+}
+
+.related_spec_item {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .6rem;
+    box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.1);
+}
+
+.spec_name {
+    width: 100%;
+    margin-bottom: .6rem;
+}
+
+.spec_name a {
+    color: #3b82f6;
+    font-size: 1.5rem;
+}
+
+.spec_name a:hover {
+    color: #5aa1f6;
+    text-decoration: underline;
+}
+
+.spec_order_mode {
+    color: #677777;
+}
+
+.spec_contact_info {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.spec_contact_info span {
+    color: #c00000;
 }

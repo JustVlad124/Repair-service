@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'users')]
     protected Collection $roles;
 
+    #[ORM\ManyToMany(targetEntity: Address::class, inversedBy: 'users')]
+    private Collection $addresses;
+
 //    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
 //    private Collection $orders;
 
@@ -40,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->roles = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,4 +164,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //
 //        return $this;
 //    }
+
+/**
+ * @return Collection<int, Address>
+ */
+public function getAddresses(): Collection
+{
+    return $this->addresses;
+}
+
+public function addAddress(Address $address): self
+{
+    if (!$this->addresses->contains($address)) {
+        $this->addresses->add($address);
+    }
+
+    return $this;
+}
+
+public function removeAddress(Address $address): self
+{
+    $this->addresses->removeElement($address);
+
+    return $this;
+}
 }

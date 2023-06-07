@@ -1,0 +1,59 @@
+.client-profile-content h1 {
+    margin-bottom: 1.5rem;
+}
+
+.profile-header {
+    display: flex;
+}
+
+.profile-main-info {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.profile-img {
+    margin-right: 2rem;
+}
+
+.profile-img img {
+    width: 13.75rem;
+}
+
+.user-fullname {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: .4rem;
+}
+
+.user-location {
+    margin-top: 1rem;
+}
+
+.user-about {
+    margin-top: 1rem;
+}
+
+.user-about h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.user-about p {
+    font-size: 1.1rem;
+}
+
+.change-profile {
+    display: inline-block;
+    margin-top: 4rem;
+    padding: .6rem 1rem;
+    border: none;
+    border-radius: .6rem;
+    background-color: var(--btn-col);
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+.change-profile:hover {
+    background-color: var(--btn-col-hover);
+}

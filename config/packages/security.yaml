@@ -35,6 +35,7 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^(?!/(|login|register)), roles: [ ROLE_USER, ROLE_SPECIALIST ] }
         - { path: ^/client, roles: ROLE_USER }
+        - { path: ^/specialist, roles: ROLE_SPECIALIST }
 
 when@test:
     security:

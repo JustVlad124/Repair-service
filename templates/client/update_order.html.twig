@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="margin-top: 100px;">
+        {{ form_start(updateForm) }}
+            {{ form_widget(updateForm) }}
+
+            <button type="submit">Сохранить изменения</button>
+
+        {{ form_end(updateForm) }}
+    </div>
+{% endblock %}

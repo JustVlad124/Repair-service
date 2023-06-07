@@ -20,14 +20,20 @@
         <div class="header-col">
             <div class="main-site-header-client-auth">
                 <div class="signBtn">
-                    <a href="{{ app.user ? path('app_main_page') : path('app_login') }}">
+                    <a href="{{ app.user ? is_granted('ROLE_USER') ? path('app_client_homepage') : path('app_specialist_homepage') : path('app_login') }}">
                         <span>{{ app.user ? app.user.email : 'Войти' }}</span>
                     </a>
                 </div>
 
-                {% if app.user  %}
+                {% if is_granted('ROLE_USER')  %}
                     <div class="auth-user-nav">
                         <a href="{{ path('app_client_homepage') }}">Мои заказы</a>
+                        <a href="{{ path('app_client_profile') }}">Профиль</a>
+                        <a class="logout" href="{{ path('app_logout') }}">Выйти</a>
+                    </div>
+                {% elseif is_granted('ROLE_SPECIALIST') %}
+                    <div class="auth-user-nav">
+                        <a href="{{ path('app_specialist_homepage') }}">Мои заказы</a>
                         <a href="">Профиль</a>
                         <a class="logout" href="{{ path('app_logout') }}">Выйти</a>
                     </div>

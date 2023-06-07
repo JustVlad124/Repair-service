@@ -1,0 +1,49 @@
+.order-header-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-header-info div {
+    margin-right: 2rem;
+}
+
+.order-main-info h2 {
+    margin: 1rem 0;
+}
+
+.order-main-info p {
+    font-size: 1.1rem;
+}
+
+.order-main-info-service ul {
+    margin: .5rem .5rem;
+}
+
+.order-main-info-service ul li {
+    margin-bottom: .3rem;
+}
+
+.client-profile-content p {
+    font-size: 1.2rem;
+}
+
+.client-profile-content footer {
+    margin-top: 3rem;
+}
+
+.client-profile-content footer a {
+    padding: .6rem 1rem;
+    border-radius: .6rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #eee;
+    margin-right: 1rem;
+}
+
+.client-profile-content footer .delete_order_btn {
+    background-color: #B0413E;
+}
+
+.client-profile-content footer .update_order_btn {
+    background-color: #3b82f6;
+}

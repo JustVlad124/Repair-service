@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside class="spec-nav">
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
+                            <li><a href="">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="spec-new-orders-main">
+                    <div class="tabs">
+                        <nav class="tabs__nav">
+                            <button class="tabs__button" data-for-tab="1">Все заказы</button>
+                            <button class="tabs__button" data-for-tab="2">Подходящие</button>
+                        </nav>
+
+                        <div class="tabs__content" data-tab="1">
+                            <form action="" class="spec-search-order-form">
+                                <label for="category">Категория услуг</label>
+                                <input type="text" id="category">
+                                <label for="cost">Ставка за услуги</label>
+                                <input type="text" placeholder="от" id="cost">
+                                <input type="text" placeholder="до" id="cost">
+                                <label for="location">Местоположение проведения работ</label>
+                                <input type="text" id="location">
+                                <button type="submit">Поиск</button>
+                            </form>
+
+                            <h1>Список заказов</h1>
+
+                            {% for order in orders %}
+                                <div class="spec-new-order-item">
+                                    <h1><a href="">{{ order.orderName }}</a></h1>
+                                    <div>
+                                        <p>test <time>10 минут назад</time></p>
+                                        <p>Сантехника</p>
+                                    </div>
+                                    <div>
+                                        <p>Москва</p>
+                                    </div>
+                                    <div>
+                                        <form action="{{ path('app_specialist_available_orders') }}" method="post">
+                                            <span>от 3000 рб</span>
+                                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                                            <button class="order-cancel-btn">Откликнуться</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="tabs__content" data-tab="2">
+                            <div class="spec-new-order-item">
+                                <h1><a href="">Замена труб в ванной комнате</a></h1>
+                                <div>
+                                    <p>test <time>10 минут назад</time></p>
+                                    <p>Сантехника</p>
+                                </div>
+                                <div>
+                                    <p>Москва</p>
+                                </div>
+                                <div>
+                                    <span>от 3000 рб</span>
+                                    <button class="order-cancel-btn">Откликнуться</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function setupTabs() {
+            document.querySelectorAll('.tabs__button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const navBar = button.parentElement;
+                    const tabsContainer = navBar.parentElement;
+                    const tabNumber = button.dataset.forTab;
+                    const tabToActivate = tabsContainer.querySelector(`.tabs__content[data-tab="${tabNumber}"]`)
+
+                    navBar.querySelectorAll('.tabs__button').forEach(button => {
+                        button.classList.remove('tabs__button--active');
+                    })
+
+                    tabsContainer.querySelectorAll('.tabs__content').forEach(tab => {
+                        tab.classList.remove('tabs__content--active');
+                    })
+
+                    button.classList.add('tabs__button--active');
+                    tabToActivate.classList.add('tabs__content--active');
+                })
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+
+            document.querySelectorAll('.tabs').forEach(tabsContainer => {
+                tabsContainer.querySelector('.tabs__nav .tabs__button').click();
+            })
+        });
+    </script>
+{% endblock %}

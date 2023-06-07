@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ClientController!{% endblock %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside>
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
+                            <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="client-profile-content">
+                    <h1>Профиль</h1>
+                    <header class="profile-header">
+                        <div class="profile-img">
+                            <img src="{{ asset('build/images/profile-placeholder.png') }}" alt="Client profile image">
+                        </div>
+                        <div class="profile-main-info">
+                            <p class="user-fullname">Фамилия Имя Отчество</p>
+                            <p class="user-status">last time online</p>
+                            <p class="user-location">г. Москва, ул. Якиманки 72, кв. 43</p>
+                        </div>
+                    </header>
+                    <section class="user-about">
+                        <h2>Информация о пользователе</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid consectetur corporis cupiditate debitis dolorem dolores error expedita, fugit illum incidunt laborum neque officia qui quos repellat tempore ut, vero.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid consectetur corporis cupiditate debitis dolorem dolores error expedita, fugit illum incidunt laborum neque officia qui quos repellat tempore ut, vero.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid consectetur corporis cupiditate debitis dolorem dolores error expedita, fugit illum incidunt laborum neque officia qui quos repellat tempore ut, vero.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid consectetur corporis cupiditate debitis dolorem dolores error expedita, fugit illum incidunt laborum neque officia qui quos repellat tempore ut, vero.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid consectetur corporis cupiditate debitis dolorem dolores error expedita, fugit illum incidunt laborum neque officia qui quos repellat tempore ut, vero.
+                        </p>
+                    </section>
+                    <a class="change-profile">Редактировать профиль</a>
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

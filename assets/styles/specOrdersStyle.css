@@ -1,0 +1,42 @@
+.tabs {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.tabs > h1 {
+    margin-bottom: 1.5rem;
+}
+
+.tabs__nav {
+    display: flex;
+}
+
+.tabs__nav * {
+    margin-right: 1rem;
+}
+
+.tabs__button {
+    width: 24.3%;
+    padding: .6rem 1rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: .6rem;
+    background-color: var(--input-color);
+    cursor: pointer;
+}
+
+.tabs__button:hover {
+    background-color: #c0c0c0;
+}
+
+.tabs__button--active {
+    background-color: var(--input-color-hover);
+}
+
+.tabs__content {
+    display: none;
+}
+
+.tabs__content--active {
+    display: block;
+}

@@ -18,16 +18,20 @@ class Specialist
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: Respond::class)]
+    #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: SpecialistRespond::class)]
     private Collection $responds;
 
     #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: Order::class)]
     private Collection $orders;
 
+    #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: ClientOffer::class)]
+    private Collection $clientOffers;
+
     public function __construct()
     {
         $this->responds = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->clientOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,14 +52,14 @@ class Specialist
     }
 
     /**
-     * @return Collection<int, Respond>
+     * @return Collection<int, SpecialistRespond>
      */
     public function getResponds(): Collection
     {
         return $this->responds;
     }
 
-    public function addRespond(Respond $respond): self
+    public function addRespond(SpecialistRespond $respond): self
     {
         if (!$this->responds->contains($respond)) {
             $this->responds->add($respond);
@@ -65,7 +69,7 @@ class Specialist
         return $this;
     }
 
-    public function removeRespond(Respond $respond): self
+    public function removeRespond(SpecialistRespond $respond): self
     {
         if ($this->responds->removeElement($respond)) {
             // set the owning side to null (unless already changed)
@@ -101,6 +105,36 @@ class Specialist
             // set the owning side to null (unless already changed)
             if ($order->getSpecialist() === $this) {
                 $order->setSpecialist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ClientOffer>
+     */
+    public function getClientOffers(): Collection
+    {
+        return $this->clientOffers;
+    }
+
+    public function addClientOffer(ClientOffer $clientOffer): self
+    {
+        if (!$this->clientOffers->contains($clientOffer)) {
+            $this->clientOffers->add($clientOffer);
+            $clientOffer->setSpecialist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientOffer(ClientOffer $clientOffer): self
+    {
+        if ($this->clientOffers->removeElement($clientOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($clientOffer->getSpecialist() === $this) {
+                $clientOffer->setSpecialist(null);
             }
         }
 

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside>
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_client_show_order', { id: order.id}) }}">Мой заказ</a></li>
+                            <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="client-homepage-main-section">
+                    <h1>Заказ: "{{ order.orderName }}"</h1>
+                    <h2>Связанные с заказом специалисты</h2>
+                    <div class="related_spec_list">
+                        {% if not relatedSpecialists %}
+                            <p style="font-size: 1.2rem">У этого заказа пока нет связанных специалистов. Пожалуйста предложите специалистам
+                                выполнить данный заказ или долждитесь, когда не него откликнуться</p>
+                        {% endif %}
+                        {% for relatedSpecialist in relatedSpecialists %}
+                            <div class="related_spec_item">
+                                <div class="spec_name">
+                                    <a href="{{ path('app_client_specialist_profile', { id: relatedSpecialist.specialist.id }) }}">
+                                        {{ relatedSpecialist.specialist.userId.email }}
+                                    </a>
+                                </div>
+                                <div>
+                                    <p class="spec_order_mode">Выбранный вами или отклик</p>
+                                    <p class="spec_contact_info">Контактные данные: <span>+7 (999) 999 99-99</span></p>
+                                </div>
+                                <div>
+                                    <form action="{{ path('app_client_related_specialists', { id: order.id }) }}" method="post">
+                                        <input type="hidden" name="specialist_id" value="{{ relatedSpecialist.specialist.id }}">
+                                        <button type="submit" class="order-cancel-btn"
+                                        onclick="alert('Специалист назначен')">
+                                            Назначить
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

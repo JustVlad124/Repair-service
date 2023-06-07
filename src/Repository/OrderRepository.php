@@ -39,6 +39,20 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByNotAppointedSpecialists(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.specialist is NULL')
+            ->getQuery()->getResult();
+    }
+
+    public function findByAppointedSpecialist(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.specialist IS NOT NULL')
+            ->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Order[] Returns an array of Order objects
 //     */

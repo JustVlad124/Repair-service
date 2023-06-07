@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\OrderState\ArchiveState;
+use App\Entity\OrderState\InPendingState;
+use App\Entity\OrderState\InProgressState;
+use App\Entity\OrderState\OrderStateInterface;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,20 +29,35 @@ class Order
     #[ORM\Column(nullable: true)]
     private ?float $cost = null;
 
-//    #[ORM\ManyToOne(inversedBy: 'orders')]
-//    private ?User $user = null;
-
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?Client $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?Specialist $specialist = null;
 
-    #[ORM\OneToMany(mappedBy: 'order_id', targetEntity: Respond::class)]
+    #[ORM\OneToMany(mappedBy: 'order', targetEntity: SpecialistRespond::class)]
     private Collection $responds;
+
+    #[ORM\OneToMany(mappedBy: 'order', targetEntity: ClientOffer::class)]
+    private Collection $clientOffers;
+
+    #[ORM\OneToMany(mappedBy: 'orderAddress', targetEntity: Address::class)]
+    private Collection $address;
+
+    private InPendingState $inPendingState;
+    private InProgressState $inProgressState;
+    private ArchiveState $archiveState;
+
+    private OrderStateInterface $state;
+
     public function __construct()
     {
         $this->responds = new ArrayCollection();
+        $this->clientOffers = new ArrayCollection();
+        $this->address = new ArrayCollection();
+        $this->inPendingState = new InPendingState($this);
+        $this->inProgressState = new InProgressState($this);
+        $this->archiveState = new ArchiveState($this);
     }
 
     public function getId(): ?int
@@ -82,18 +101,6 @@ class Order
         return $this;
     }
 
-//    public function getUser(): ?User
-//    {
-//        return $this->user;
-//    }
-//
-//    public function setUser(?User $user): self
-//    {
-//        $this->user = $user;
-//
-//        return $this;
-//    }
-
     public function getClient(): ?Client
     {
         return $this->client;
@@ -107,14 +114,14 @@ class Order
     }
 
     /**
-     * @return Collection<int, Respond>
+     * @return Collection<int, SpecialistRespond>
      */
     public function getResponds(): Collection
     {
         return $this->responds;
     }
 
-    public function addRespond(Respond $respond): self
+    public function addRespond(SpecialistRespond $respond): self
     {
         if (!$this->responds->contains($respond)) {
             $this->responds->add($respond);
@@ -124,7 +131,7 @@ class Order
         return $this;
     }
 
-    public function removeRespond(Respond $respond): self
+    public function removeRespond(SpecialistRespond $respond): self
     {
         if ($this->responds->removeElement($respond)) {
             // set the owning side to null (unless already changed)
@@ -146,5 +153,92 @@ class Order
         $this->specialist = $specialist;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, ClientOffer>
+     */
+    public function getClientOffers(): Collection
+    {
+        return $this->clientOffers;
+    }
+
+    public function addClientOffer(ClientOffer $clientOffer): self
+    {
+        if (!$this->clientOffers->contains($clientOffer)) {
+            $this->clientOffers->add($clientOffer);
+            $clientOffer->setOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientOffer(ClientOffer $clientOffer): self
+    {
+        if ($this->clientOffers->removeElement($clientOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($clientOffer->getOrder() === $this) {
+                $clientOffer->setOrder(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Address>
+     */
+    public function getAddress(): Collection
+    {
+        return $this->address;
+    }
+
+    public function addAddress(Address $address): self
+    {
+        if (!$this->address->contains($address)) {
+            $this->address->add($address);
+            $address->setOrderAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAddress(Address $address): self
+    {
+        if ($this->address->removeElement($address)) {
+            // set the owning side to null (unless already changed)
+            if ($address->getOrderAddress() === $this) {
+                $address->setOrderAddress(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setState(OrderStateInterface $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getState(): OrderStateInterface
+    {
+        return $this->state;
+    }
+
+    public function getInPendingState(): OrderStateInterface
+    {
+        return $this->inPendingState;
+    }
+
+    public function getInProgressState(): OrderStateInterface
+    {
+        return $this->inProgressState;
+    }
+
+    public function getArchiveState(): OrderStateInterface
+    {
+        return $this->archiveState;
     }
 }

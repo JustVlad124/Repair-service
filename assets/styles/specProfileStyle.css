@@ -1,0 +1,168 @@
+.spec-profile-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
+.spec-profile-main-section header {
+    display: flex;
+}
+
+.spec-profile-rating-and-review {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.spec-profile-rating-and-review div {
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.spec-profile-rating-and-review div span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.spec-profile-rating-and-review div a:hover {
+    color: var(--btn-col);
+}
+
+.spec-profile-rating-and-review img {
+    width: 2rem;
+    margin-right: .5rem;
+}
+
+.offer-button {
+    margin: 2rem 0;
+}
+
+.offer-button button {
+    padding: .6rem 1rem;
+    border: none;
+    border-radius: .6rem;
+    background-color: var(--btn-col);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.offer-button button:hover {
+    background-color: var(--btn-col-hover);
+}
+
+.spec-profile-main-section > div {
+    margin: 1.5rem 0;
+}
+
+.spec-profile-main-section > div > h2 {
+    margin-bottom: .6rem;
+}
+
+.spec-profile-experience ul {
+    list-style-position: inside;
+}
+
+.spec-profile-experience ul li {
+    margin-bottom: .6rem;
+}
+
+.spec-profile-portfolio h2 span {
+    color: #777777;
+    font-weight: normal;
+}
+
+.spec-profile-portfolio p {
+    height: 250px;
+    background-image: linear-gradient(120deg, #3b82f6, #93c5fd);
+    text-align: center;
+}
+
+.spec-profile-services div {
+    margin-bottom: .5rem;
+}
+
+.spec-services-table{
+    width: 100%;
+}
+
+.spec-services-table td {
+    padding-bottom: .6rem;
+}
+
+.spec-services-table span {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.item_value {
+    text-align: right;
+}
+
+.spec-profile-review header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.spec-profile-review header h2 span {
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.spec-profile-review header img {
+    width: 1.5rem;
+    margin-right: .5rem;
+}
+
+.spec-profile-review header div {
+    display: flex;
+    align-items: center;
+}
+
+.spec-profile-review header div span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.spec-profile-review-item {
+    display: flex;
+    margin: 1.5rem 0;
+}
+
+.review-info {
+    padding-left: 3rem;
+}
+
+.review-info > p {
+    margin-bottom: .5rem;
+}
+
+.spec-profile-client-service {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.spec-profile-review-rating div {
+    display: flex;
+}
+
+.spec-profile-review-rating div img {
+    width: 1.2rem;
+    margin-right: 5px;
+    margin-bottom: .5rem;
+}
+
+.spec-profile-review-rating time {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.spec-profile-review a {
+    color: var(--btn-col);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.spec-profile-review a:hover {
+    color: var(--btn-col-hover);
+}
+

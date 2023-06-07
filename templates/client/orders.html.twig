@@ -10,8 +10,8 @@
                     <nav class="user-nav">
                         <ul>
                             <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
-                            <li><a href="">Мои заказы</a></li>
-                            <li><a href="">Профиль</a></li>
+                            <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -25,7 +25,7 @@
                     </nav>
                     <div class="order-tabs-content">
                         <div class="order-list" id="pending">
-                            {% for order in orders %}
+                            {% for order in notAppointedOrders %}
                                 <div class="order-tab">
                                     <h2>{{ order.orderName }}</h2>
                                     <div>
@@ -34,145 +34,42 @@
                                     </div>
                                     <div>
                                         <a href="{{ path('app_client_available_specialists', { id: order.id }) }}">Подобрать специалиста</a>
-                                        <a href="">Отклики от специалистов</a>
                                     </div>
-                                    <div>
-                                        <a href="{{ path('app_client_delete_order', { id: order.id }) }}" class="order-cancel-btn">
+                                    <div class="order-tab-button-section">
+                                        <a href="{{ path('app_client_related_specialists', { id: order.id }) }}" class="order-cancel-btn">
+                                            Перейти к специалистам
+                                        </a>
+                                        <a href="{{ path('app_client_delete_order', { id: order.id }) }}">
                                             Отменить заказ
                                         </a>
                                     </div>
                                 </div>
                             {% endfor %}
-{#                            <div class="order-tab">#}
-{#                                <h2>Облицовка плиткой ванной комнаты</h2>#}
-{#                                <div>#}
-{#                                    <a href="" class="order-info">Детали заказа</a>#}
-{#                                    <p>21.04.2023</p>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <a href="">Подобрать специалиста</a>#}
-{#                                    <a href="">Отклики от специалистов</a>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <button type="button" class="order-cancel-btn">#}
-{#                                        Отменить заказ#}
-{#                                    </button>#}
-{#                                </div>#}
-{#                            </div>#}
-                            {#                            <div class="order-tab">#}
-                            {#                                <div>#}
-                            {#                                    <h2>Замена труб</h2>#}
-                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
-                            {#                                    <p>21.04.2023</p>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <a href="">Подобрать специалиста</a>#}
-                            {#                                    <a href="">Отклики от специалистов</a>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <button type="button" class="order-cancel-btn">#}
-                            {#                                        Отменить заказ#}
-                            {#                                    </button>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
                         </div>
                         <div class="order-list" id="inProgress">
-                            <div class="order-tab">
-                                <h2>Замена труб в ванной комнате</h2>
-                                <div>
-                                    <a href="" class="order-info">Детали заказа</a>
-                                    <p>22.04.2023</p>
+                            {% for order in appointedOrders %}
+                                <div class="order-tab">
+                                    <h2>{{ order.orderName }}</h2>
+                                    <div>
+                                        <a href="{{ path('app_client_show_order', { id: order.id }) }}" class="order-info">Детали заказа</a>
+                                        {#                                        <p>22.04.2023</p>#}
+                                    </div>
+                                    <div>
+                                        <a href="{{ path('app_client_specialist_profile', { id: order.specialist.id }) }}">{{ order.specialist.userId.email }}</a>
+                                    </div>
+                                    <div class="order-tab-button-section">
+                                        <a href="{{ path('app_client_homepage') }}">
+                                            Завершшить заказ
+                                        </a>
+                                        <a href="{{ path('app_client_delete_order', { id: order.id }) }}">
+                                            Отменить заказ
+                                        </a>
+                                    </div>
                                 </div>
-                                <div>
-                                    <a href="" style="color: #3b82f6">Иванов Иван Иванович</a>
-                                </div>
-                                <div>
-                                    <button type="button" class="order-cancel-btn">
-                                        Отменить заказ
-                                    </button>
-                                </div>
-                            </div>
-                            {#                            <div class="order-tab">#}
-                            {#                                <div>#}
-                            {#                                    <h2>В процессе</h2>#}
-                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
-                            {#                                    <p>дата создания заказа</p>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <a href="">Подобрать специалиста</a>#}
-                            {#                                    <a href="">Отклики от специалистов</a>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <button type="button" class="order-cancel-btn">#}
-                            {#                                        Отменить заказ#}
-                            {#                                    </button>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="order-tab">#}
-                            {#                                <div>#}
-                            {#                                    <h2>В процессе</h2>#}
-                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
-                            {#                                    <p>дата создания заказа</p>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <a href="">Подобрать специалиста</a>#}
-                            {#                                    <a href="">Отклики от специалистов</a>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <button type="button" class="order-cancel-btn">#}
-                            {#                                        Отменить заказ#}
-                            {#                                    </button>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
+                            {% endfor %}
                         </div>
                         <div class="order-list" id="archive">
-                            <div class="order-tab">
-                                <h2>Замена труб в ванной комнате</h2>
-                                <div>
-                                    <a href="" class="order-info">Детали заказа</a>
-                                    <p>22.04.2023</p>
-                                </div>
-                                <div>
-                                    <a href="" style="color: #3b82f6">Иванов Иван Иванович</a>
-                                </div>
-                                <div>
-                                    {#                                    <button type="button" class="order-cancel-btn">#}
-                                    {#                                        Отменить заказ#}
-                                    {#                                    </button>#}
-                                </div>
-                            </div>
-                            {#                            <div class="order-tab">#}
-                            {#                                <div>#}
-                            {#                                    <h2>В архиве</h2>#}
-                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
-                            {#                                    <p>дата создания заказа</p>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <a href="">Подобрать специалиста</a>#}
-                            {#                                    <a href="">Отклики от специалистов</a>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <button type="button" class="order-cancel-btn">#}
-                            {#                                        Отменить заказ#}
-                            {#                                    </button>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="order-tab">#}
-                            {#                                <div>#}
-                            {#                                    <h2>В архиве</h2>#}
-                            {#                                    <a href="" class="order-info">Детали заказа</a>#}
-                            {#                                    <p>дата создания заказа</p>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <a href="">Подобрать специалиста</a>#}
-                            {#                                    <a href="">Отклики от специалистов</a>#}
-                            {#                                </div>#}
-                            {#                                <div>#}
-                            {#                                    <button type="button" class="order-cancel-btn">#}
-                            {#                                        Отменить заказ#}
-                            {#                                    </button>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
+
                         </div>
                     </div>
                 </main>

@@ -21,9 +21,13 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Order::class)]
     private Collection $orders;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: ClientOffer::class)]
+    private Collection $clientOffers;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->clientOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,5 +75,40 @@ class Client
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, ClientOffer>
+     */
+    public function getClientOffers(): Collection
+    {
+        return $this->clientOffers;
+    }
+
+    public function addClientOffer(ClientOffer $clientOffer): self
+    {
+        if (!$this->clientOffers->contains($clientOffer)) {
+            $this->clientOffers->add($clientOffer);
+            $clientOffer->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientOffer(ClientOffer $clientOffer): self
+    {
+        if ($this->clientOffers->removeElement($clientOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($clientOffer->getClient() === $this) {
+                $clientOffer->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->user->getEmail();
     }
 }
