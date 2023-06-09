@@ -18,34 +18,65 @@
                     <nav class="tabs__nav">
                         <button class="tabs__button" data-for-tab="1">Открытые</button>
                         <button class="tabs__button" data-for-tab="2">В работе</button>
-                        <button class="tabs__button" data-for-tab="3">Завершенные</button>
-                        <button class="tabs__button" data-for-tab="4">Архив</button>
+                        <button class="tabs__button" data-for-tab="3">Архив</button>
                     </nav>
                     <h1>Список заказов</h1>
                     <div class="tabs__content" data-tab="1">
-                        <div class="spec-new-order-item">
-                            <h1><a href="">Замена труб в ванной комнате</a></h1>
-                            <div>
-                                <p>test <time>10 минут назад</time></p>
-                                <p>Сантехника</p>
+                        {% for order in inPendingOrders %}
+                            <div class="spec-new-order-item">
+                                <h1><a href="{{ path('app_specialist_show_order', { id: order.id }) }}">{{ order.orderName }}</a></h1>
+                                <div class="client_info">
+                                    <p>{{ order.client.userId.email }}</p>
+                                    <p>Сантехника</p>
+                                </div>
+                                <div>
+                                    <p>Москва</p>
+                                </div>
+                                <div class="order_item_btns">
+                                    <span style="margin-bottom: .6rem">от 3000 рб</span>
+                                    <a href="{{ path('app_specialist_show_order', { id: order.id }) }}"
+                                       class="order-cancel-btn"
+                                    >
+                                        Просмотреть заказ
+                                    </a>
+                                </div>
                             </div>
-                            <div>
-                                <p>Москва</p>
-                            </div>
-                            <div>
-                                <span>от 3000 рб</span>
-                                <button class="order-cancel-btn">Откликнуться</button>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="tabs__content" data-tab="2">
-                        <h1>tab 2</h1>
+                        {% for order in inProgressOrders %}
+                            <div class="spec-new-order-item">
+                                <h1><a href="{{ path('app_specialist_show_order', { id: order.id }) }}">{{ order.orderName }}</a></h1>
+                                <div class="client_info">
+                                    <p>{{ order.client.userId.email }}</p>
+                                    <p>Сантехника</p>
+                                </div>
+                                <div>
+                                    <p>Москва</p>
+                                </div>
+                                <div class="order_item_btns">
+                                    <span>от 3000 рб</span>
+                                    <button class="order-cancel-btn">Отказаться</button>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="tabs__content" data-tab="3">
-                        <h1>tab 3</h1>
-                    </div>
-                    <div class="tabs__content" data-tab="4">
-                        <h1>tab 4</h1>
+                        {% for order in archiveOrders %}
+                            <div class="spec-new-order-item">
+                                <h1><a href="{{ path('app_specialist_show_order', { id: order.id }) }}">{{ order.orderName }}</a></h1>
+                                <div class="client_info">
+                                    <p>{{ order.client.userId.email }}</p>
+                                    <p>Сантехника</p>
+                                </div>
+                                <div>
+                                    <p>Москва</p>
+                                </div>
+                                <div class="order_item_btns">
+                                    <span>от 3000 рб</span>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

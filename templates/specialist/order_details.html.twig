@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside class="spec-nav">
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="spec_order_detail_main">
+                    <header class="order-header-info">
+                        <h1>Заказ: {{ order.orderName }}</h1>
+                        <div>
+                            <p>Номер заказа: №{{ order.id }}</p>
+                            <p>Дата создания заказа: 22.04.2023</p>
+                        </div>
+                    </header>
+                    <main class="order-main-info">
+                        <h2>Название заказа</h2>
+                        <p>{{ order.orderName }}</p>
+
+                        <div class="spec_order_info_client">
+                            <h2>Заказчик</h2>
+                            <p>Имя заказчика: {{ order.client.userId.email }}</p>
+                            <p>Номер заказчика: <span>{{ order.client.userId.email }}</span></p>
+                        </div>
+
+                        <h2>Услуги</h2>
+                        <section class="order-main-info-service">
+                            <table class="spec-services-table">
+                                <tbody>
+                                    <tr>
+                                        <td><span>Сантехника</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Установка фильтра для воды</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                        <h2>Место проведения работ</h2>
+                        <p>Московская обл., Москва, Никольская 7, кв. 12</p>
+                        <h2>Дата проведения работ</h2>
+                        <p>22.04.2023</p>
+                        <h2>Детали заказа</h2>
+                        <p>
+                            Нужно заменить трубу под ванной.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Aliquam ducimus fugit iste magni minima modi nemo officia perferendis ratione reiciendis,
+                            repellendus repudiandae sequi ullam voluptate voluptatem! Dolorum maiores obcaecati repellat.
+                        </p>
+                        <h2>Ожидаемая стоимость</h2>
+                        <p>3000 руб.</p>
+                    </main>
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

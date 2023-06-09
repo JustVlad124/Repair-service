@@ -4,11 +4,13 @@
 }
 
 .tabs > h1 {
-    margin-bottom: 1.5rem;
+    margin: 1rem 0;
 }
 
 .tabs__nav {
     display: flex;
+    justify-content: left;
+    margin-bottom: 1rem;
 }
 
 .tabs__nav * {
@@ -16,8 +18,8 @@
 }
 
 .tabs__button {
-    width: 24.3%;
-    padding: .6rem 1rem;
+    width: 31%;
+    padding: 0 1rem;
     font-size: 1.1rem;
     border: none;
     border-radius: .6rem;
@@ -39,4 +41,17 @@
 
 .tabs__content--active {
     display: block;
+}
+
+.search_by_order {
+    width: 97%;
+    padding: .6rem 1rem;
+    font-size: 1.1rem;
+    border-radius: .6rem;
+    border: none;
+    background-color: var(--input-color);
+}
+
+.search_by_order:hover {
+    background-color: var(--input-color-hover);
 }

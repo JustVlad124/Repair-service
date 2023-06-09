@@ -25,11 +25,13 @@
                             <form action="" class="spec-search-order-form">
                                 <label for="category">Категория услуг</label>
                                 <input type="text" id="category">
+                                <label for="service">Наименование услуги</label>
+                                <input type="text" id="service">
                                 <label for="cost">Ставка за услуги</label>
                                 <input type="text" placeholder="от" id="cost">
                                 <input type="text" placeholder="до" id="cost">
                                 <label for="location">Местоположение проведения работ</label>
-                                <input type="text" id="location">
+                                <input type="text" id="location" placeholder="Укажиет город">
                                 <button type="submit">Поиск</button>
                             </form>
 
@@ -38,34 +40,36 @@
                             {% for order in orders %}
                                 <div class="spec-new-order-item">
                                     <h1><a href="">{{ order.orderName }}</a></h1>
-                                    <div>
-                                        <p>test <time>10 минут назад</time></p>
+                                    <div class="client_info">
+                                        <p>{{ order.client.userId.email }}</p>
                                         <p>Сантехника</p>
                                     </div>
                                     <div>
                                         <p>Москва</p>
                                     </div>
-                                    <div>
-                                        <form action="{{ path('app_specialist_available_orders') }}" method="post">
-                                            <span>от 3000 рб</span>
-                                            <input type="hidden" name="order_id" value="{{ order.id }}">
-                                            <button class="order-cancel-btn">Откликнуться</button>
-                                        </form>
+                                    <div class="order_item_btns">
+                                        <span style="margin-bottom: .6rem;">от 3000 рб</span>
+                                        <a href="{{ path('app_specialist_respond', { id: order.id }) }}"
+                                           class="order-cancel-btn"
+                                        >
+                                            Откликнуться
+                                        </a>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                         <div class="tabs__content" data-tab="2">
+                            <input type="text" placeholder="Поиск..." class="search_by_order">
                             <div class="spec-new-order-item">
                                 <h1><a href="">Замена труб в ванной комнате</a></h1>
-                                <div>
-                                    <p>test <time>10 минут назад</time></p>
+                                <div class="client_info">
+                                    <p>sdfasdfasd</p>
                                     <p>Сантехника</p>
                                 </div>
                                 <div>
                                     <p>Москва</p>
                                 </div>
-                                <div>
+                                <div class="order_item_btns">
                                     <span>от 3000 рб</span>
                                     <button class="order-cancel-btn">Откликнуться</button>
                                 </div>

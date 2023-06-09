@@ -1,7 +1,23 @@
+.spec-profile-main-section p {
+    font-size: 1.1rem;
+}
+
 .spec-profile-name {
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     font-weight: bold;
     margin-bottom: .5rem;
+}
+
+.spec_profile_img {
+    display: flex;
+    justify-content: center;
+    min-width: 210px;
+    margin-right: 3rem;
+}
+
+.spec_profile_img img {
+    height: 200px;
+    max-width: 200px;
 }
 
 .spec-profile-main-section header {
@@ -34,7 +50,7 @@
 }
 
 .offer-button {
-    margin: 2rem 0;
+    margin: 2.5rem 0 !important;
 }
 
 .offer-button a {
@@ -67,15 +83,35 @@
     margin-bottom: .6rem;
 }
 
+.spec-profile-portfolio header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.spec-profile-portfolio header img {
+    width: 1rem;
+}
+
+.portfolio_add_button {
+    padding: .4rem .2rem .4rem .6rem;
+    background-color: var(--input-color);
+    font-size: .9rem;
+    border-radius: .3rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.09);
+    cursor: pointer;
+}
+
+.portfolio_add_button:hover {
+    background-color: var(--input-color-hover);
+}
+
 .spec-profile-portfolio h2 span {
     color: #777777;
     font-weight: normal;
-}
-
-.spec-profile-portfolio p {
-    height: 250px;
-    background-image: linear-gradient(120deg, #3b82f6, #93c5fd);
-    text-align: center;
 }
 
 .spec-profile-services div {
@@ -170,3 +206,135 @@
     color: var(--btn-col-hover);
 }
 
+/* PROFILE SECTION */
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Create four equal columns that floats next to eachother */
+.column {
+    margin: 5px;
+}
+
+.column img {
+    height: 150px;
+    border-radius: 3%;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Hide the slides by default */
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Caption text */
+.caption-container {
+    text-align: center;
+    background-color: black;
+    padding: 2px 16px;
+    color: white;
+}
+
+img.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+img.hover-shadow {
+    transition: 0.3s;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

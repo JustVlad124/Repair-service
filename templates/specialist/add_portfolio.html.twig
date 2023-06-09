@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside class="spec-nav">
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="portfolio_adding_form">
+                    <h1>Новое изображение</h1>
+                    {{ form_start(portfolioForm) }}
+                        {{ form_row(portfolioForm.projectName) }}
+                        <br>
+                        {{ form_row(portfolioForm.description) }}
+                        <p style="font-size: .9rem; color: #777777">В тексте отзыва можно использовать только 1000 символов.</p>
+                        <br>
+                        {{ form_row(portfolioForm.imagePath) }}
+
+                        <button type="submit" class="order-cancel-btn" style="margin-top: 2rem;">Добавить</button>
+                    {{ form_end(portfolioForm) }}
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

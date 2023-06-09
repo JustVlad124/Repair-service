@@ -63,10 +63,20 @@
     justify-content: space-between;
     align-items: center;
     flex-flow: wrap;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    padding: .6rem 1rem;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .6rem;
+    padding: .6rem 1.5rem;
     margin: 1rem 0;
+    box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.1);
+}
+
+.spec-new-order-item .client_info {
+    margin-bottom: 1rem;
+}
+
+.spec-new-order-item .client_info p {
+    margin-top: .5rem;
 }
 
 .spec-new-order-item > h1 {
@@ -92,10 +102,18 @@
     color: rgba(0, 0, 0, 0.5);
 }
 
-.spec-new-order-item div:last-child form {
+/*.spec-new-order-item div:last-child {*/
+/*    display: flex;*/
+/*    flex-flow: column wrap;*/
+/*    text-align: right;*/
+/*    margin-bottom: .6rem;*/
+/*}*/
+
+.order_item_btns {
     display: flex;
     flex-flow: column wrap;
     text-align: right;
+    margin-bottom: .6rem;
 }
 
 .spec-new-order-item button {
@@ -115,4 +133,12 @@
 
 .spec-new-order-h1 {
     margin-top: 1.5rem;
+}
+
+.spec_order_info_client p {
+    margin-bottom: .6rem;
+}
+
+.spec_order_info_client span {
+    color: var(--btn-col);
 }
