@@ -34,13 +34,18 @@
                                     <p class="spec_contact_info">Контактные данные: <span>+7 (999) 999 99-99</span></p>
                                 </div>
                                 <div>
-                                    <form action="{{ path('app_client_related_specialists', { id: order.id }) }}" method="post">
-                                        <input type="hidden" name="specialist_id" value="{{ relatedSpecialist.specialist.id }}">
-                                        <button type="submit" class="order-cancel-btn"
-                                        onclick="alert('Специалист назначен')">
-                                            Назначить
-                                        </button>
-                                    </form>
+{#                                    <form action="{{ path('app_client_related_specialists', { id: order.id }) }}" method="post">#}
+{#                                        <input type="hidden" name="specialist_id" value="{{ relatedSpecialist.specialist.id }}">#}
+{#                                        <button type="submit" class="order-cancel-btn"#}
+{#                                        onclick="alert('Специалист назначен')">#}
+{#                                            Назначить#}
+{#                                        </button>#}
+{#                                    </form>#}
+                                    <a href="{{ path('app_client_appoint_specialist', { orderId: order.id, specId: relatedSpecialist.specialist.id }) }}"
+                                       class="order-cancel-btn"
+                                    >
+                                        Назначить
+                                    </a>
                                 </div>
                             </div>
                         {% endfor %}

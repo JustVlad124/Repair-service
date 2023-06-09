@@ -55,11 +55,15 @@
                                         {#                                        <p>22.04.2023</p>#}
                                     </div>
                                     <div>
-                                        <a href="{{ path('app_client_specialist_profile', { id: order.specialist.id }) }}">{{ order.specialist.userId.email }}</a>
+                                        <a href="{{ path('app_client_specialist_profile', { id: order.specialist.id }) }}"
+                                           class="client_link_to_spec"
+                                        >
+                                            {{ order.specialist.userId.email }}
+                                        </a>
                                     </div>
                                     <div class="order-tab-button-section">
-                                        <a href="{{ path('app_client_homepage') }}">
-                                            Завершшить заказ
+                                        <a href="{{ path('app_client_complete_order', { id: order.id }) }}" class="review_btn">
+                                            Завершить заказ
                                         </a>
                                         <a href="{{ path('app_client_delete_order', { id: order.id }) }}">
                                             Отменить заказ
@@ -69,7 +73,31 @@
                             {% endfor %}
                         </div>
                         <div class="order-list" id="archive">
-
+                            {% for order in archivedOrders %}
+                                <div class="order-tab">
+                                    <h2>{{ order.orderName }}</h2>
+                                    <div>
+                                        <a href="{{ path('app_client_show_order', { id: order.id }) }}"
+                                           class="order-info"
+                                        >
+                                            Детали заказа
+                                        </a>
+                                        {#                                        <p>22.04.2023</p>#}
+                                    </div>
+                                    <div>
+                                        <a href="{{ path('app_client_specialist_profile', { id: order.specialist.id }) }}"
+                                           class="client_link_to_spec"
+                                        >
+                                            {{ order.specialist.userId.email }}
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ path('app_client_leave_feedback', { id: order.specialist.id }) }}" class="review_btn">
+                                            Оставить отзыв
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </main>

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside>
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
+                            <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="client-homepage-main-section">
+                    <div class="rating_spec_section">
+                        <p>Отзыв на специалиста:
+                            <a href="{{ path('app_client_specialist_profile', { id: specialist.id }) }}">
+                                {{ specialist.userId.email }}
+                            </a>
+                        </p>
+                        <h1>Как вам работа специалиста?</h1>
+                    </div>
+                    <div>
+                        {{ form_start(feedbackForm) }}
+                            {{ form_row(feedbackForm.ratingText) }}
+                            <p style="font-size: .9rem; color: #777777">В тексте отзыва можно использовать только 1000 символов.</p>
+
+                            <div class="rate">
+                                <h2>Оценка</h2>
+
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+
+                            <button type="submit" class="order-cancel-btn">Оставить отзыв</button>
+                        {{ form_end(feedbackForm) }}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

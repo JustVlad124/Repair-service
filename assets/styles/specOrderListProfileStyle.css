@@ -84,7 +84,8 @@
     flex-direction: column;
 }
 
-.spec-aside-bar button {
+.spec-aside-bar a {
+    text-align: center;
     border: none;
     border-radius: .6rem;
     margin-bottom: 1rem;
@@ -94,7 +95,7 @@
     background-color: var(--btn-col);
 }
 
-.spec-aside-bar button:hover {
+.spec-aside-bar a:hover {
     background-color: var(--btn-col-hover);
 }
 

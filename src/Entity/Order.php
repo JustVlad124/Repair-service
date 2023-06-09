@@ -44,20 +44,16 @@ class Order
     #[ORM\OneToMany(mappedBy: 'orderAddress', targetEntity: Address::class)]
     private Collection $address;
 
-    private InPendingState $inPendingState;
-    private InProgressState $inProgressState;
-    private ArchiveState $archiveState;
+    #[ORM\ManyToOne(inversedBy: 'order')]
+    private ?OrderState $orderState = null;
 
-    private OrderStateInterface $state;
+
 
     public function __construct()
     {
         $this->responds = new ArrayCollection();
         $this->clientOffers = new ArrayCollection();
         $this->address = new ArrayCollection();
-        $this->inPendingState = new InPendingState($this);
-        $this->inProgressState = new InProgressState($this);
-        $this->archiveState = new ArchiveState($this);
     }
 
     public function getId(): ?int
@@ -215,30 +211,15 @@ class Order
         return $this;
     }
 
-    public function setState(OrderStateInterface $state): self
+    public function getOrderState(): ?OrderState
     {
-        $this->state = $state;
+        return $this->orderState;
+    }
+
+    public function setOrderState(?OrderState $orderState): self
+    {
+        $this->orderState = $orderState;
 
         return $this;
-    }
-
-    public function getState(): OrderStateInterface
-    {
-        return $this->state;
-    }
-
-    public function getInPendingState(): OrderStateInterface
-    {
-        return $this->inPendingState;
-    }
-
-    public function getInProgressState(): OrderStateInterface
-    {
-        return $this->inProgressState;
-    }
-
-    public function getArchiveState(): OrderStateInterface
-    {
-        return $this->archiveState;
     }
 }

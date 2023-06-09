@@ -27,11 +27,19 @@ class Specialist
     #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: ClientOffer::class)]
     private Collection $clientOffers;
 
+    #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: SpecialistRating::class)]
+    private Collection $specialistRatings;
+
+    #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: Portfolio::class)]
+    private Collection $portfolios;
+
     public function __construct()
     {
         $this->responds = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->clientOffers = new ArrayCollection();
+        $this->specialistRatings = new ArrayCollection();
+        $this->portfolios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,6 +143,66 @@ class Specialist
             // set the owning side to null (unless already changed)
             if ($clientOffer->getSpecialist() === $this) {
                 $clientOffer->setSpecialist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialistRating>
+     */
+    public function getSpecialistRatings(): Collection
+    {
+        return $this->specialistRatings;
+    }
+
+    public function addSpecialistRating(SpecialistRating $specialistRating): self
+    {
+        if (!$this->specialistRatings->contains($specialistRating)) {
+            $this->specialistRatings->add($specialistRating);
+            $specialistRating->setSpecialist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialistRating(SpecialistRating $specialistRating): self
+    {
+        if ($this->specialistRatings->removeElement($specialistRating)) {
+            // set the owning side to null (unless already changed)
+            if ($specialistRating->getSpecialist() === $this) {
+                $specialistRating->setSpecialist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Portfolio>
+     */
+    public function getPortfolios(): Collection
+    {
+        return $this->portfolios;
+    }
+
+    public function addPortfolio(Portfolio $portfolio): self
+    {
+        if (!$this->portfolios->contains($portfolio)) {
+            $this->portfolios->add($portfolio);
+            $portfolio->setSpecialist($this);
+        }
+
+        return $this;
+    }
+
+    public function removePortfolio(Portfolio $portfolio): self
+    {
+        if ($this->portfolios->removeElement($portfolio)) {
+            // set the owning side to null (unless already changed)
+            if ($portfolio->getSpecialist() === $this) {
+                $portfolio->setSpecialist(null);
             }
         }
 

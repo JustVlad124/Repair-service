@@ -53,6 +53,16 @@ class SpecialistController extends AbstractController
         ]);
     }
 
+    #[Route('/specialist/profile', name: 'app_specialist_profile')]
+    public function specialistProfile(): Response
+    {
+        $specialist = $this->getCurrentSpecialist();
+
+        return $this->render('specialist/profile.html.twig', [
+            'specialist' => $specialist,
+        ]);
+    }
+
     private function getCurrentSpecialist(): Specialist
     {
         $currentUser = $this->security->getUser();

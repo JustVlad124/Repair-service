@@ -28,7 +28,6 @@
                                             <p class="spec-name">
                                                 <a href="{{ path('app_client_specialist_profile', { id: specialist.id }) }}">{{ specialist.userId.email }}</a>
                                             </p>
-                                            <p class="spec-spec">Сантехника</p>
                                         </div>
                                     </header>
                                     <main>
@@ -37,17 +36,16 @@
                                         {#                                    </div>#}
                                         <div class="spec-review-section">
                                             <h2>Отзывы</h2>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Cumque illum magni quae? Alias aliquid animi commodi culpa cum debitis,
-                                                distinctio esse eveniet, exercitationem, id itaque iusto nam odio quia voluptas.
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Aperiam atque ducimus excepturi facilis pariatur placeat vel.
-                                                At dolorem doloribus, ex ipsam magnam maxime minus mollitia, praesentium quae quasi, sequi suscipit?
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Ad incidunt minima modi odit repellendus velit, voluptatibus.
-                                                Ad deserunt expedita, illo impedit in labore quam recusandae rerum sequi ullam? Alias, cumque.
-                                            </p>
+                                            {% if not specialist.specialistRatings %}
+                                                <p>У данного специалиста пока нет отзывов.</p>
+                                            {% else %}
+                                                <div>
+                                                    {% for rating in specialist.specialistRatings %}
+                                                        <p style="margin-bottom: 1rem; font-size: 1rem">{{ rating.ratingText }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+
                                             {#                                    Эта ссылка ведет на анкету специалиста (можно сделать якорь на конкретную секцию )#}
                                             <a href="">Показать все отзывы</a>
                                         </div>
@@ -71,17 +69,24 @@
                                     </main>
                                 </div>
                                 <aside class="spec-aside-bar">
-
-                                    <form action="{{ path('app_client_available_specialists', { id: order.id }) }}" method="post">
-                                        <input type="hidden" name="specialist_id" value="{{ specialist.id }}">
-                                        <button type="submit">
-                                            Предложить заказ
-                                        </button>
-                                    </form>
+                                    <a
+                                            href="{{ path('app_client_offer_order_to_specialist',
+                                                { orderId: order.id, specId: specialist.id }) }}"
+                                    >
+                                        Предложить заказ
+                                    </a>
 
                                     <div class="spec-rating">
-                                        <p><span>5,0</span>Рейтинг</p>
-                                        <p><span>33</span>Отзыва</p>
+                                        {% set avgRating = 0 %}
+                                        {% for rating in specialist.specialistRatings %}
+                                            {% set avgRating = avgRating + rating.rating %}
+                                        {% endfor %}
+                                        {% if specialist.specialistRatings.count == 0 %}
+                                            <p style="text-align: center;">У этого пользователя пока нет отзывов</p>
+                                        {% else %}
+                                            <p><span>{{ avgRating / specialist.specialistRatings.count }}</span>Рейтинг</p>
+                                            <p><span>{{ specialist.specialistRatings.count }}</span>Отзыва</p>
+                                        {% endif %}
                                     </div>
                                     <p class="spec-location" style="margin-bottom: 1rem;">Местоположение</p>
                                     <p>Москва</p>

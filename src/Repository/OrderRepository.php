@@ -39,17 +39,30 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByNotAppointedSpecialists(): array
+    public function findByNotAppointedSpecialists(int $stateId): array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.specialist is NULL')
+            ->andWhere('o.specialist IS NULL')
+            ->andWhere('o.orderState = :val')
+            ->setParameter('val', $stateId)
             ->getQuery()->getResult();
     }
 
-    public function findByAppointedSpecialist(): array
+    public function findByAppointedSpecialist(int $stateId): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.specialist IS NOT NULL')
+            ->andWhere('o.orderState = :val')
+            ->setParameter('val', $stateId)
+            ->getQuery()->getResult();
+    }
+
+    public function findByArchivedOrders(int $stateId): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.specialist IS NOT NULL')
+            ->andWhere('o.orderState = :val')
+            ->setParameter('val', $stateId)
             ->getQuery()->getResult();
     }
 

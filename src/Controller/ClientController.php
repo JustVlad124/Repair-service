@@ -6,18 +6,19 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\ClientOffer;
 use App\Entity\Order;
+use App\Entity\OrderState;
 use App\Entity\Specialist;
+use App\Entity\SpecialistRating;
 use App\Entity\SpecialistRespond;
 use App\Entity\User;
-use App\Form\OfferOrderToSpecialistFormType;
 use App\Form\OrderFormType;
+use App\Form\RatingFormType;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -28,7 +29,6 @@ class ClientController extends AbstractController
                                 private Security $security)
     {
     }
-
 
     #[Route('/client/profile', name: 'app_client_profile')]
     public function clientProfile(): Response
@@ -43,15 +43,55 @@ class ClientController extends AbstractController
     #[Route('/client/orders', name: 'app_client_homepage')]
     public function orders(): Response
     {
-        $client = $this->getCurrentClient();
+        $orderStateRepository = $this->entityManager->getRepository(OrderState::class);
 
-        $notAppointedOrders = $this->orderRepository->findByNotAppointedSpecialists();
+        $inPendingStateId = $orderStateRepository->findOneBy(['stateName' => 'STATE_IN_PENDING'])->getId();
+        $inProgressStateId = $orderStateRepository->findOneBy(['stateName' => 'STATE_IN_PROGRESS'])->getId();
+        $archivedStateId = $orderStateRepository->findOneBy(['stateName' => 'STATE_ARCHIVE'])->getId();
 
-        $appointedOrders = $this->orderRepository->findByAppointedSpecialist();
+        $notAppointedOrders = $this->orderRepository->findByNotAppointedSpecialists($inPendingStateId);
+
+        $appointedOrders = $this->orderRepository->findByAppointedSpecialist($inProgressStateId);
+
+        $archivedOrders = $this->orderRepository->findByArchivedOrders($archivedStateId);
 
         return $this->render('client/orders.html.twig', [
             'notAppointedOrders' => $notAppointedOrders,
             'appointedOrders' => $appointedOrders,
+            'archivedOrders' => $archivedOrders,
+        ]);
+    }
+
+    #[Route('/client/rating_to_specialist/{id}', name: 'app_client_leave_feedback')]
+    public function leaveFeedbackForSpecialist(int $id, Request $request): Response
+    {
+        $feedback = new SpecialistRating();
+        $form = $this->createForm(RatingFormType::class, $feedback);
+        $form->handleRequest($request);
+
+        $client = $this->getCurrentClient();
+
+        $specialist = $this->entityManager->getRepository(Specialist::class)->find($id);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $currentDate = new \DateTimeImmutable('now');
+
+            $feedback->setRatingText($form->get('ratingText')->getData());
+            $feedback->setRating($request->get('rate'));
+            $feedback->setCreatedAt($currentDate);
+            $feedback->setClient($client);
+            $feedback->setSpecialist($specialist);
+
+            $this->entityManager->persist($feedback);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_client_homepage');
+        }
+
+        return $this->render('client/create_rating_to_spec.html.twig', [
+            'feedbackForm' => $form->createView(),
+            'specialist' => $specialist,
         ]);
     }
 
@@ -70,6 +110,10 @@ class ClientController extends AbstractController
             $client = $this->getCurrentClient();
 
             $order->setClient($client);
+
+            $orderState = $this->entityManager->getRepository(OrderState::class)->findOneBy(['stateName' => 'STATE_IN_PENDING']);
+
+            $order->setOrderState($orderState);
 
             $this->entityManager->persist($order);
             $this->entityManager->flush();
@@ -110,6 +154,23 @@ class ClientController extends AbstractController
         return $this->redirectToRoute('app_client_homepage');
     }
 
+    #[Route('/client/orders/complete/{id}', name: 'app_client_complete_order', methods: ['GET'])]
+    public function completeOrder(int $id): Response
+    {
+        $order = $this->orderRepository->find($id);
+
+        $orderStateRepository = $this->entityManager->getRepository(OrderState::class);
+
+        $archivedState = $orderStateRepository->findOneBy(['stateName' => 'STATE_ARCHIVE']);
+
+        $order->setOrderState($archivedState);
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_client_homepage');
+    }
+
 
     #[Route('/client/specialist_profile/{id}', name: 'app_client_specialist_profile')]
     public function showSpecialistProfile(int $id): Response
@@ -136,37 +197,44 @@ class ClientController extends AbstractController
     #[Route('/client/orders/{id}/specialists', name: 'app_client_available_specialists')]
     public function showAvailableSpecialists(int $id, Request $request): Response
     {
-        $offer = new ClientOffer();
-
         $order = $this->orderRepository->find($id);
 
         $specialistRepository = $this->entityManager->getRepository(Specialist::class);
 
         $specialists = $specialistRepository->findAll();
 
-        if ($request->getMethod() === Request::METHOD_POST) {
-
-            $client = $this->getCurrentClient();
-            $specialist = $specialistRepository->find($request->get('specialist_id'));
-
-            $offer->setOrder($order);
-            $offer->setClient($client);
-            $offer->setSpecialist($specialist);
-
-            $offerRepository = $this->entityManager->getRepository(ClientOffer::class);
-
-            if (!$offerRepository->findBy(['client' => $client, 'order' => $order, 'specialist' => $specialist])) {
-                $this->entityManager->persist($offer);
-                $this->entityManager->flush();
-            } else {
-                print '<script>alert("Вы уже отправили заявку этому пользователю.")</script>';
-            }
-        }
-
         return $this->render('client/search_specialists.html.twig', [
             'specialists' => $specialists,
             'order' => $order,
         ]);
+    }
+
+    #[Route('/client/orders/{orderId}/specialists/{specId}', name: 'app_client_offer_order_to_specialist')]
+    public function offerOrderToSpecialist(int $orderId, int $specId): Response
+    {
+        $client = $this->getCurrentClient();
+
+        $specialistRepository = $this->entityManager->getRepository(Specialist::class);
+        $specialist = $specialistRepository->find($specId);
+
+        $order = $this->orderRepository->find($orderId);
+
+        $offer = new ClientOffer();
+
+        $offer->setOrder($order);
+        $offer->setClient($client);
+        $offer->setSpecialist($specialist);
+
+        $offerRepository = $this->entityManager->getRepository(ClientOffer::class);
+
+        if (!$offerRepository->findBy(['client' => $client, 'order' => $order, 'specialist' => $specialist])) {
+            $this->entityManager->persist($offer);
+            $this->entityManager->flush();
+        } else {
+            print '<script>alert("Вы уже отправили заявку этому пользователю.")</script>';
+        }
+
+        return $this->redirectToRoute('app_client_available_specialists', ['id' => $orderId]);
     }
 
     #[Route('/client/orders/{id}/related_specialists', name: 'app_client_related_specialists')]
@@ -183,23 +251,31 @@ class ClientController extends AbstractController
 
         $relatedSpecialists = array_merge($relatedOffersByClient, $relatedRespondsBySpec);
 
-        if ($request->getMethod() === Request::METHOD_POST) {
-            $specialistRepository = $this->entityManager->getRepository(Specialist::class);
-
-            $specialist = $specialistRepository->find($request->get('specialist_id'));
-
-            $order->setSpecialist($specialist);
-
-            $this->entityManager->persist($order);
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_client_homepage');
-        }
-
         return $this->render('client/related_specialists.html.twig', [
             'order' => $order,
             'relatedSpecialists' => $relatedSpecialists,
         ]);
+    }
+
+    #[Route('/client/orders/{orderId}/related_specialists/{specId}', name: 'app_client_appoint_specialist')]
+    public function appointSpecialistToOrder(int $orderId, int $specId): Response
+    {
+        $specialistRepository = $this->entityManager->getRepository(Specialist::class);
+
+        $specialist = $specialistRepository->find($specId);
+
+        $order = $this->orderRepository->find($orderId);
+
+        $orderStateRepository = $this->entityManager->getRepository(OrderState::class);
+        $inProgressState = $orderStateRepository->findOneBy(['stateName' => 'STATE_IN_PROGRESS']);
+
+        $order->setSpecialist($specialist);
+        $order->setOrderState($inProgressState);
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_client_homepage');
     }
 
     private function getCurrentClient(): Client

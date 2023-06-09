@@ -24,10 +24,14 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: ClientOffer::class)]
     private Collection $clientOffers;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: SpecialistRating::class)]
+    private Collection $specialistRatings;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
         $this->clientOffers = new ArrayCollection();
+        $this->specialistRatings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,5 +114,35 @@ class Client
     public function __toString(): string
     {
         return $this->user->getEmail();
+    }
+
+    /**
+     * @return Collection<int, SpecialistRating>
+     */
+    public function getSpecialistRatings(): Collection
+    {
+        return $this->specialistRatings;
+    }
+
+    public function addSpecialistRating(SpecialistRating $specialistRating): self
+    {
+        if (!$this->specialistRatings->contains($specialistRating)) {
+            $this->specialistRatings->add($specialistRating);
+            $specialistRating->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialistRating(SpecialistRating $specialistRating): self
+    {
+        if ($this->specialistRatings->removeElement($specialistRating)) {
+            // set the owning side to null (unless already changed)
+            if ($specialistRating->getClient() === $this) {
+                $specialistRating->setClient(null);
+            }
+        }
+
+        return $this;
     }
 }

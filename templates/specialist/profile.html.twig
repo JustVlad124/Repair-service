@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside class="spec-nav">
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="spec-profile-main-section">
+                    <header>
+                        <div class="spec-profile-img">
+                            <img src="{{ asset('build/images/profile-placeholder.png') }}" alt="specialist profile picture">
+                        </div>
+                        <div class="spec-profile-header">
+                            <p class="spec-profile-name">Иванов Иван Иванович</p>
+{#                            <p class="spec-last-online">Last time online: 15 min ago</p>#}
+                            <div class="spec-profile-rating-and-review">
+                                <div>
+                                    <img class="rating-star" src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating star icon">
+                                    {% set avgRating = 0 %}
+                                    {% for rating in specialist.specialistRatings %}
+                                        {% set avgRating = avgRating + rating.rating %}
+                                    {% endfor %}
+                                    <span>{{ avgRating / specialist.specialistRatings.count }}</span>
+                                </div>
+                                <div>
+                                    <img src="{{ asset('build/images/review.77db3cb1.svg') }}" alt="reviews icon">
+                                    <a href="#"><span>{{ specialist.specialistRatings.count }} Отзыва</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <main class="spec-profile-main-section">
+                        <div class="offer-button">
+{#                            <button type="button">Предложить заказ</button>#}
+                            <a href="" class="order-cancel-btn">Редактировать профиль</a>
+                        </div>
+                        <div class="spec-profile-location">
+                            <h2>Местоположение</h2>
+                            <p>Москва</p>
+                        </div>
+                        <div class="spec-profile-about-info">
+                            <h2>О себе</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Cumque illum magni quae? Alias aliquid animi commodi culpa cum debitis,
+                                distinctio esse eveniet, exercitationem, id itaque iusto nam odio quia voluptas.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Aperiam atque ducimus excepturi facilis pariatur placeat vel.
+                                At dolorem doloribus, ex ipsam magnam maxime minus mollitia, praesentium quae quasi, sequi suscipit?
+                            </p>
+                        </div>
+                        <div class="spec-profile-experience">
+                            <h2>Опыт работы</h2>
+                            <ul>
+                                <li>Опыт работы с 2016</li>
+                                <li>На сервисе с 2021</li>
+                            </ul>
+                        </div>
+                        <div class="spec-profile-portfolio">
+                            <h2>Портфолио <span>150</span> </h2>
+                            <p>Here suppose to be portfolio section</p>
+                        </div>
+                        <div class="spec-profile-services">
+                            <h2>Услуги и цены</h2>
+                            <table class="spec-services-table">
+                                <tbody>
+                                    <tr>
+                                        <td><span>Сантехника</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Замена труб</td>
+                                        <td class="item_value">1500 рб/час</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Замена труб</td>
+                                        <td class="item_value">1500 рб/час</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Замена труб</td>
+                                        <td class="item_value">1500 рб/час</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Плиточники</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Укладка плитки на стену</td>
+                                        <td class="item_value">1500 рб/час</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Укладка плитки на пол</td>
+                                        <td class="item_value">1200 рб/час</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="item_name">Демонтаж старой плитки</td>
+                                        <td class="item_value">2000 рб/час</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="spec-profile-review">
+                            <header>
+                                <h2>Отзывы <span>{{ specialist.specialistRatings.count }}</span></h2>
+                                <div>
+                                    <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
+                                    <span>{{ avgRating / specialist.specialistRatings.count }}</span>
+                                </div>
+                            </header>
+                            <div class="spec-profile-review-list">
+                                {% for rating in specialist.specialistRatings %}
+                                    <div class="spec-profile-review-item">
+                                        <div class="spec-profile-review-rating">
+                                            <div>
+                                                {% for i in 1..5 %}
+                                                    {% if rating.rating >= i %}
+                                                        <img src="{{ asset('build/images/rating_star_gold.6712d83b.svg') }}" alt="rating icon">
+                                                    {% else %}
+                                                        <img src="{{ asset('build/images/rating_star_no_color.156f75e2.svg') }}" alt="rating icon">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            <time>{{ rating.createdAt|date('d-m-Y') }}</time>
+                                        </div>
+                                        <div class="review-info">
+                                            <p class="spec-profile-client-name">{{ rating.client.userId.email }}</p>
+                                            <p class="spec-profile-client-service">Сантехника</p>
+                                            <p class="spec-profile-client-review-text">
+                                                {{ rating.ratingText }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            <a href="">Показать все отзывы</a>
+                        </div>
+
+                    </main>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    width: max-content;
+    height: 46px;
+    margin: 3rem 0;
+}
+
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size: 40px;
+    color:#ccc;
+}
+
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.rating_spec_section > p {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.rating_spec_section > p a {
+    color: #3b82f6;
+}
+
+.rating_spec_section > p a:hover {
+    color: #5aa1f6;
+    text-decoration: underline;
+}
+

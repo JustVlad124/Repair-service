@@ -11,6 +11,11 @@
     gap: 1rem;
 }
 
+.user-nav {
+    position: sticky;
+    top: 5.5rem;
+}
+
 .user-nav ul {
     list-style: none;
 }
@@ -204,4 +209,29 @@
 
 .spec_contact_info span {
     color: #c00000;
+}
+
+.review_btn {
+    padding: .6rem 1rem;
+    border-radius: .6rem;
+    font-size: 1.1rem;
+    color: #eee;
+    background-color: var(--btn-col);
+}
+
+.review_btn:hover {
+    background-color: var(--btn-col-hover);
+}
+
+.client_link_to_spec {
+    color: #3b82f6;
+}
+
+.client_link_to_spec:visited {
+    color: #7b11ff;
+}
+
+.client_link_to_spec:hover {
+    color: #5aa1f6;
+    text-decoration: underline;
 }
