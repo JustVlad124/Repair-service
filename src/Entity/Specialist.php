@@ -33,6 +33,21 @@ class Specialist
     #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: Portfolio::class)]
     private Collection $portfolios;
 
+    #[ORM\OneToMany(mappedBy: 'specialist', targetEntity: Service::class)]
+    private Collection $services;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $aboutMyself = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $education = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $workExperience = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatarImage = null;
+
     public function __construct()
     {
         $this->responds = new ArrayCollection();
@@ -40,6 +55,7 @@ class Specialist
         $this->clientOffers = new ArrayCollection();
         $this->specialistRatings = new ArrayCollection();
         $this->portfolios = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -205,6 +221,84 @@ class Specialist
                 $portfolio->setSpecialist(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->setSpecialist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getSpecialist() === $this) {
+                $service->setSpecialist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAboutMyself(): ?string
+    {
+        return $this->aboutMyself;
+    }
+
+    public function setAboutMyself(?string $aboutMyself): self
+    {
+        $this->aboutMyself = $aboutMyself;
+
+        return $this;
+    }
+
+    public function getEducation(): ?string
+    {
+        return $this->education;
+    }
+
+    public function setEducation(?string $education): self
+    {
+        $this->education = $education;
+
+        return $this;
+    }
+
+    public function getWorkExperience(): ?string
+    {
+        return $this->workExperience;
+    }
+
+    public function setWorkExperience(?string $workExperience): self
+    {
+        $this->workExperience = $workExperience;
+
+        return $this;
+    }
+
+    public function getAvatarImage(): ?string
+    {
+        return $this->avatarImage;
+    }
+
+    public function setAvatarImage(?string $avatarImage): self
+    {
+        $this->avatarImage = $avatarImage;
 
         return $this;
     }

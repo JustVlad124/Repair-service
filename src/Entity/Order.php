@@ -41,11 +41,20 @@ class Order
     #[ORM\OneToMany(mappedBy: 'order', targetEntity: ClientOffer::class)]
     private Collection $clientOffers;
 
-    #[ORM\OneToMany(mappedBy: 'orderAddress', targetEntity: Address::class)]
-    private Collection $address;
-
     #[ORM\ManyToOne(inversedBy: 'order')]
     private ?OrderState $orderState = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?Address $address = null;
+
+    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'orders')]
+    private Collection $services;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
 
 
@@ -53,7 +62,7 @@ class Order
     {
         $this->responds = new ArrayCollection();
         $this->clientOffers = new ArrayCollection();
-        $this->address = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,36 +190,6 @@ class Order
         return $this;
     }
 
-    /**
-     * @return Collection<int, Address>
-     */
-    public function getAddress(): Collection
-    {
-        return $this->address;
-    }
-
-    public function addAddress(Address $address): self
-    {
-        if (!$this->address->contains($address)) {
-            $this->address->add($address);
-            $address->setOrderAddress($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAddress(Address $address): self
-    {
-        if ($this->address->removeElement($address)) {
-            // set the owning side to null (unless already changed)
-            if ($address->getOrderAddress() === $this) {
-                $address->setOrderAddress(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getOrderState(): ?OrderState
     {
         return $this->orderState;
@@ -219,6 +198,69 @@ class Order
     public function setOrderState(?OrderState $orderState): self
     {
         $this->orderState = $orderState;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->addOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->removeElement($service)) {
+            $service->removeOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

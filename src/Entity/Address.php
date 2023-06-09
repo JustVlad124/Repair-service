@@ -18,12 +18,25 @@ class Address
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'addresses')]
     private Collection $users;
 
-    #[ORM\ManyToOne(inversedBy: 'address')]
-    private ?Order $orderAddress = null;
+    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Order::class)]
+    private Collection $orders;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $countrySubject = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $street = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $number = null;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,14 +71,80 @@ class Address
         return $this;
     }
 
-    public function getOrderAddress(): ?Order
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
     {
-        return $this->orderAddress;
+        return $this->orders;
     }
 
-    public function setOrderAddress(?Order $orderAddress): self
+    public function addOrder(Order $order): self
     {
-        $this->orderAddress = $orderAddress;
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getAddress() === $this) {
+                $order->setAddress(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCountrySubject(): ?string
+    {
+        return $this->countrySubject;
+    }
+
+    public function setCountrySubject(?string $countrySubject): self
+    {
+        $this->countrySubject = $countrySubject;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getStreet(): ?string
+    {
+        return $this->street;
+    }
+
+    public function setStreet(?string $street): self
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?string $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }

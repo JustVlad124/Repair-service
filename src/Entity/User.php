@@ -35,6 +35,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Address::class, inversedBy: 'users')]
     private Collection $addresses;
 
+    #[ORM\Column(length: 255)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $surname = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $patronymic = null;
+
+    #[ORM\Column(length: 30)]
+    private ?string $phoneNumber = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
 //    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
 //    private Collection $orders;
 
@@ -185,6 +203,78 @@ public function addAddress(Address $address): self
 public function removeAddress(Address $address): self
 {
     $this->addresses->removeElement($address);
+
+    return $this;
+}
+
+public function getFirstName(): ?string
+{
+    return $this->firstName;
+}
+
+public function setFirstName(string $firstName): self
+{
+    $this->firstName = $firstName;
+
+    return $this;
+}
+
+public function getSurname(): ?string
+{
+    return $this->surname;
+}
+
+public function setSurname(string $surname): self
+{
+    $this->surname = $surname;
+
+    return $this;
+}
+
+public function getPatronymic(): ?string
+{
+    return $this->patronymic;
+}
+
+public function setPatronymic(?string $patronymic): self
+{
+    $this->patronymic = $patronymic;
+
+    return $this;
+}
+
+public function getPhoneNumber(): ?string
+{
+    return $this->phoneNumber;
+}
+
+public function setPhoneNumber(string $phoneNumber): self
+{
+    $this->phoneNumber = $phoneNumber;
+
+    return $this;
+}
+
+public function getCreatedAt(): ?\DateTimeImmutable
+{
+    return $this->createdAt;
+}
+
+public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+{
+    $this->createdAt = $createdAt;
+
+    return $this;
+}
+
+public function getUpdatedAt(): ?\DateTimeImmutable
+{
+    return $this->updatedAt;
+}
+
+public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+{
+    $this->updatedAt = $updatedAt;
 
     return $this;
 }
