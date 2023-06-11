@@ -10,6 +10,7 @@
                             <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
                             <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
                             <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_specialist_user_settings') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -21,8 +22,7 @@
                             <img src="{{ asset('build/images/egor.f47ded4f.jpg') }}" alt="specialist profile picture">
                         </div>
                         <div class="spec-profile-header">
-                            <h1>{{ specialist.userId.email }}</h1>
-{#                            <p class="spec-profile-name">{{ specialist.userId.email }}</p>#}
+                            <h1>{{ specialist.userId.surname }} {{ specialist.userId.firstName }} {{ specialist.userId.patronymic }}</h1>
 {#                            <p class="spec-last-online">Last time online: 15 min ago</p>#}
                             <div class="spec-profile-rating-and-review">
                                 <div>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div>
                                     <img src="{{ asset('build/images/review.77db3cb1.svg') }}" alt="reviews icon">
-                                    <a href="#"><span>{{ specialist.specialistRatings.count }} Отзыв</span></a>
+                                    <a href="#"><span>{{ specialist.specialistRatings.count }} Отзыва</span></a>
                                 </div>
                             </div>
                         </div>
@@ -48,12 +48,18 @@
                     <main class="spec-profile-main-section">
                         <div class="offer-button">
 {#                            <button type="button">Предложить заказ</button>#}
-                            <a href="" class="order-cancel-btn">Редактировать профиль</a>
+                            <a href="{{ path('app_specialist_edit_profile') }}" class="order-cancel-btn">Редактировать профиль</a>
                         </div>
                         <div class="spec-profile-location">
                             <h2>Местоположение</h2>
                             <p>Москва</p>
                         </div>
+                        {% if specialist.education %}
+                            <div>
+                                <h2>Образование</h2>
+                                <p>{{ specialist.education }}</p>
+                            </div>
+                        {% endif %}
                         <div class="spec-profile-about-info">
                             <h2>О себе</h2>
                             <p>
@@ -162,7 +168,17 @@
                             </div>
                         </div>
                         <div class="spec-profile-services">
-                            <h2>Услуги и цены</h2>
+                            <header>
+                                <h2>Услуги и цены</h2>
+                                <div>
+                                    <a href="{{ path('app_specialist_add_service') }}"
+                                       class="portfolio_add_button">
+                                        Добавить
+                                        <img src="{{ asset('build/images/plus-alt.7c370fd4.svg') }}" alt="plus sign">
+                                    </a>
+                                </div>
+                            </header>
+
                             <table class="spec-services-table">
                                 <tbody>
                                     <tr>

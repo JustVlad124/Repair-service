@@ -118,6 +118,17 @@
     margin-bottom: .5rem;
 }
 
+.spec-profile-services header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.spec-profile-services header img {
+    width: 1rem;
+}
+
 .spec-services-table{
     width: 100%;
 }

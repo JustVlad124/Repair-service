@@ -16,17 +16,17 @@
                     </nav>
                 </aside>
                 <main class="portfolio_adding_form">
-                    <h1>Новое изображение</h1>
-                    {{ form_start(portfolioForm) }}
-                        {{ form_row(portfolioForm.projectName) }}
+                    <h1 style="margin-bottom: 1rem;">Новая услуга</h1>
+                    {{ form_start(serviceForm, { attr: { style: 'font-size: 1.1rem;' }}) }}
+
+                        {{ form_row(serviceForm.serviceName) }}
                         <br>
-                        {{ form_row(portfolioForm.description) }}
-                        <p style="font-size: .9rem; color: #777777">В тексте отзыва можно использовать только 1000 символов.</p>
+                        {{ form_row(serviceForm.cost) }}
                         <br>
-                        {{ form_row(portfolioForm.imagePath) }}
+                        {{ form_row(serviceForm.category) }}
 
                         <button type="submit" class="order-cancel-btn" style="margin-top: 2rem;">Добавить</button>
-                    {{ form_end(portfolioForm) }}
+                    {{ form_end(serviceForm) }}
                 </main>
             </div>
         </div>

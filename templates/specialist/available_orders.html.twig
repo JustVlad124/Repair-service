@@ -10,6 +10,7 @@
                             <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
                             <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
                             <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_specialist_user_settings') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -41,14 +42,14 @@
                                 <div class="spec-new-order-item">
                                     <h1><a href="">{{ order.orderName }}</a></h1>
                                     <div class="client_info">
-                                        <p>{{ order.client.userId.email }}</p>
+                                        <p>{{ order.client.userId.firstName }}</p>
                                         <p>Сантехника</p>
                                     </div>
                                     <div>
-                                        <p>Москва</p>
+                                        <p>{{ order.address.city }}</p>
                                     </div>
                                     <div class="order_item_btns">
-                                        <span style="margin-bottom: .6rem;">от 3000 рб</span>
+                                        <span style="margin-bottom: .6rem;">от {{ order.cost }} рб</span>
                                         <a href="{{ path('app_specialist_respond', { id: order.id }) }}"
                                            class="order-cancel-btn"
                                         >
@@ -63,7 +64,7 @@
                             <div class="spec-new-order-item">
                                 <h1><a href="">Замена труб в ванной комнате</a></h1>
                                 <div class="client_info">
-                                    <p>sdfasdfasd</p>
+                                    <p>Антон</p>
                                     <p>Сантехника</p>
                                 </div>
                                 <div>
@@ -71,6 +72,20 @@
                                 </div>
                                 <div class="order_item_btns">
                                     <span>от 3000 рб</span>
+                                    <button class="order-cancel-btn">Откликнуться</button>
+                                </div>
+                            </div>
+                            <div class="spec-new-order-item">
+                                <h1><a href="">Замена проводки в частном доме</a></h1>
+                                <div class="client_info">
+                                    <p>Инна</p>
+                                    <p>Электрика</p>
+                                </div>
+                                <div>
+                                    <p>Москва</p>
+                                </div>
+                                <div class="order_item_btns">
+                                    <span>от 10000 рб</span>
                                     <button class="order-cancel-btn">Откликнуться</button>
                                 </div>
                             </div>

@@ -15,18 +15,18 @@
                         </ul>
                     </nav>
                 </aside>
-                <main class="portfolio_adding_form">
-                    <h1>Новое изображение</h1>
-                    {{ form_start(portfolioForm) }}
-                        {{ form_row(portfolioForm.projectName) }}
-                        <br>
-                        {{ form_row(portfolioForm.description) }}
-                        <p style="font-size: .9rem; color: #777777">В тексте отзыва можно использовать только 1000 символов.</p>
-                        <br>
-                        {{ form_row(portfolioForm.imagePath) }}
+                <main class="profile_edit_main">
+                    <h1>Редактирование профиля</h1>
+                    {{ form_start(profileForm) }}
+                        {{ form_row(profileForm.aboutMyself) }}
+                        <p style="color: #777777; font-size: .9rem">Не более 1000 символов</p>
+                        {{ form_row(profileForm.education) }}
+                        {{ form_row(profileForm.workExperience) }}
+                        {{ form_row(profileForm.avatarImage, { 'attr': { 'style': 'border: none;' } }) }}
 
-                        <button type="submit" class="order-cancel-btn" style="margin-top: 2rem;">Добавить</button>
-                    {{ form_end(portfolioForm) }}
+                        <button type="submit" class="order-cancel-btn">Сохранить</button>
+
+                    {{ form_end(profileForm) }}
                 </main>
             </div>
         </div>

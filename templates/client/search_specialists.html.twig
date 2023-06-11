@@ -9,7 +9,7 @@
                         <ul>
                             <li><a href="{{ path('app_client_show_order', { id: order.id }) }}">Мой заказ</a></li>
                             <li><a href="{{ path('app_client_homepage') }}">Список заказов</a></li>
-                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -26,7 +26,11 @@
                                         </div>
                                         <div class="spec-profile-header">
                                             <p class="spec-name">
-                                                <a href="{{ path('app_client_specialist_profile', { id: specialist.id }) }}">{{ specialist.userId.email }}</a>
+                                                <a href="{{ path('app_client_specialist_profile', { id: specialist.id }) }}">
+                                                    {{ specialist.userId.surname }}
+                                                    {{ specialist.userId.firstName }}
+                                                    {{ specialist.userId.patronymic }}
+                                                </a>
                                             </p>
                                         </div>
                                     </header>
@@ -53,15 +57,25 @@
                                             <h2>Предоставляемые услуги</h2>
                                             <table class="spec-services-table">
                                                 <tbody>
-                                                    <tr style="display: block; margin-bottom: .6rem; font-size: 1.1rem; font-weight: bold;">Сантехника</tr>
-                                                    <tr>
-                                                        <td class="item_name">Услуга</td>
-                                                        <td class="item_value">3000 рб/кв.м</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="item_name">Услуга</td>
-                                                        <td class="item_value">3000 рб/кв.м</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td><span>Сантехника</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="item_name">Установка фильтра для воды</td>
+                                                    <td class="item_value">3000 рб/шт.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="item_name">Демонтаж душевой кабины</td>
+                                                    <td class="item_value">2000 рб/шт.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="item_name">Онлайн-консультация сантехника</td>
+                                                    <td class="item_value">3000 рб/усл.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="item_name">Демонтаж раковины</td>
+                                                    <td class="item_value">1000 рб/шт.</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                             <a href="">Показать все услуги</a>
@@ -89,7 +103,7 @@
                                         {% endif %}
                                     </div>
                                     <p class="spec-location" style="margin-bottom: 1rem;">Местоположение</p>
-                                    <p>Москва</p>
+                                    <p>{{ specialist.userId.addresses.first.city }}</p>
                                 </aside>
                             </div>
                         {% endfor %}

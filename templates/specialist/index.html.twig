@@ -10,6 +10,7 @@
                             <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
                             <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
                             <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_specialist_user_settings') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -26,14 +27,14 @@
                             <div class="spec-new-order-item">
                                 <h1><a href="{{ path('app_specialist_show_order', { id: order.id }) }}">{{ order.orderName }}</a></h1>
                                 <div class="client_info">
-                                    <p>{{ order.client.userId.email }}</p>
+                                    <p>{{ order.client.userId.firstName }}</p>
                                     <p>Сантехника</p>
                                 </div>
                                 <div>
-                                    <p>Москва</p>
+                                    <p>{{ order.client.userId.addresses.first.city }}</p>
                                 </div>
                                 <div class="order_item_btns">
-                                    <span style="margin-bottom: .6rem">от 3000 рб</span>
+                                    <span style="margin-bottom: .6rem">от {{ order.cost }} рб</span>
                                     <a href="{{ path('app_specialist_show_order', { id: order.id }) }}"
                                        class="order-cancel-btn"
                                     >
@@ -48,14 +49,14 @@
                             <div class="spec-new-order-item">
                                 <h1><a href="{{ path('app_specialist_show_order', { id: order.id }) }}">{{ order.orderName }}</a></h1>
                                 <div class="client_info">
-                                    <p>{{ order.client.userId.email }}</p>
+                                    <p>{{ order.client.userId.firstName }}</p>
                                     <p>Сантехника</p>
                                 </div>
                                 <div>
-                                    <p>Москва</p>
+                                    <p>{{ order.address.city }}</p>
                                 </div>
                                 <div class="order_item_btns">
-                                    <span>от 3000 рб</span>
+                                    <span>от {{ order.cost }} рб</span>
                                     <button class="order-cancel-btn">Отказаться</button>
                                 </div>
                             </div>
@@ -66,14 +67,14 @@
                             <div class="spec-new-order-item">
                                 <h1><a href="{{ path('app_specialist_show_order', { id: order.id }) }}">{{ order.orderName }}</a></h1>
                                 <div class="client_info">
-                                    <p>{{ order.client.userId.email }}</p>
+                                    <p>{{ order.client.userId.firstName }}</p>
                                     <p>Сантехника</p>
                                 </div>
                                 <div>
-                                    <p>Москва</p>
+                                    <p>{{ order.address.city }}</p>
                                 </div>
                                 <div class="order_item_btns">
-                                    <span>от 3000 рб</span>
+                                    <span>от {{ order.cost }} рб</span>
                                 </div>
                             </div>
                         {% endfor %}

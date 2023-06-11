@@ -9,7 +9,7 @@
                         <ul>
                             <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
                             <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
-                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -18,7 +18,9 @@
                     <div class="rating_spec_section">
                         <p>Отзыв на специалиста:
                             <a href="{{ path('app_client_specialist_profile', { id: specialist.id }) }}">
-                                {{ specialist.userId.email }}
+                                {{ specialist.userId.surname }}
+                                {{ specialist.userId.firstName }}
+                                {{ specialist.userId.patronymic }}
                             </a>
                         </p>
                         <h1>Как вам работа специалиста?</h1>

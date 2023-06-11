@@ -1,179 +1,380 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{#    <main class="user-profile-main">#}
+{#        <div class="container">#}
+{#            <div class="user-profile-content">#}
+{#                <aside class="spec-nav">#}
+{#                    <nav class="user-nav">#}
+{#                        <ul>#}
+{#                            <li><a href="{{ path('app_client_create_order') }}">Новые заказы</a></li>#}
+{#                            <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>#}
+{#                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>#}
+{#                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>#}
+{#                        </ul>#}
+{#                    </nav>#}
+{#                </aside>#}
+{#                <div class="spec-profile-main-section">#}
+{#                    <header>#}
+{#                        <div class="spec-profile-img">#}
+{#                            <img src="{{ asset('build/images/profile-placeholder.png') }}" alt="specialist profile picture">#}
+{#                        </div>#}
+{#                        <div class="spec-profile-header">#}
+{#                            <p class="spec-profile-name">{{ specialist.userId.email }}</p>#}
+{#                            <p class="spec-last-online">Last time online: 15 min ago</p>#}
+{#                            <div class="spec-profile-rating-and-review">#}
+{#                                <div>#}
+{#                                    <img class="rating-star" src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating star icon">#}
+{#                                    <span>5,0</span>#}
+{#                                </div>#}
+{#                                <div>#}
+{#                                    <img src="{{ asset('build/images/review.77db3cb1.svg') }}" alt="reviews icon">#}
+{#                                    <a href="#"><span>33 отзыва</span></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </header>#}
+{#                    <main class="spec-profile-main-section">#}
+{#                        <div class="offer-button">#}
+{#                            <a href="{{ path('app_client_appoint_specialist', { orderId: order.id }) }}">Предложить заказ</a>#}
+{#                            <button type="button">Редактировать</button>#}
+{#                        </div>#}
+{#                        <div class="spec-profile-location">#}
+{#                            <h2>Местоположение</h2>#}
+{#                            <p>Москва</p>#}
+{#                        </div>#}
+{#                        <div class="spec-profile-about-info">#}
+{#                            <h2>О себе</h2>#}
+{#                            <p>#}
+{#                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.#}
+{#                                Cumque illum magni quae? Alias aliquid animi commodi culpa cum debitis,#}
+{#                                distinctio esse eveniet, exercitationem, id itaque iusto nam odio quia voluptas.#}
+{#                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.#}
+{#                                Aperiam atque ducimus excepturi facilis pariatur placeat vel.#}
+{#                                At dolorem doloribus, ex ipsam magnam maxime minus mollitia, praesentium quae quasi, sequi suscipit?#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="spec-profile-experience">#}
+{#                            <h2>Опыт работы</h2>#}
+{#                            <ul>#}
+{#                                <li>Опыт работы с 2016</li>#}
+{#                                <li>На сервисе с 2021</li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        #}{#                        <div class="spec-profile-portfolio">#}
+{#                        #}{#                            <h2>Портфолио <span>150</span> </h2>#}
+{#                        #}{#                            <p>Here suppose to be portfolio section</p>#}
+{#                        #}{#                        </div>#}
+{#                        <div class="spec-profile-services">#}
+{#                            <h2>Услуги и цены</h2>#}
+{#                            <table class="spec-services-table">#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td><span>Сантехника</span></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td class="item_name">Замена труб</td>#}
+{#                                    <td class="item_value">1500 рб/час</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td class="item_name">Замена труб</td>#}
+{#                                    <td class="item_value">1500 рб/час</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td class="item_name">Замена труб</td>#}
+{#                                    <td class="item_value">1500 рб/час</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td><span>Плиточники</span></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td class="item_name">Укладка плитки на стену</td>#}
+{#                                    <td class="item_value">1500 рб/час</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td class="item_name">Укладка плитки на пол</td>#}
+{#                                    <td class="item_value">1200 рб/час</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td class="item_name">Демонтаж старой плитки</td>#}
+{#                                    <td class="item_value">2000 рб/час</td>#}
+{#                                </tr>#}
+{#                                </tbody>#}
+{#                            </table>#}
+{#                        </div>#}
+{#                        <div class="spec-profile-review">#}
+{#                            <header>#}
+{#                                <h2>Отзывы <span>150</span></h2>#}
+{#                                <div>#}
+{#                                    <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                    <span>5,0</span>#}
+{#                                </div>#}
+{#                            </header>#}
+{#                            <div class="spec-profile-review-list">#}
+{#                                <div class="spec-profile-review-item">#}
+{#                                    <div class="spec-profile-review-rating">#}
+{#                                        <div>#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                        </div>#}
+{#                                        <time>26 апреля 2023</time>#}
+{#                                    </div>#}
+{#                                    <div class="review-info">#}
+{#                                        <p class="spec-profile-client-name">Алексей</p>#}
+{#                                        <p class="spec-profile-client-service">Сантехника</p>#}
+{#                                        <p class="spec-profile-client-review-text">#}
+{#                                            Don't you grow up in a hurry. Your mom'll be worried.#}
+{#                                            It was all part of the story. Even the scary nights.#}
+{#                                        </p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="spec-profile-review-item">#}
+{#                                    <div class="spec-profile-review-rating">#}
+{#                                        <div>#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                        </div>#}
+{#                                        <time>26 апреля 2023</time>#}
+{#                                    </div>#}
+{#                                    <div class="review-info">#}
+{#                                        <p class="spec-profile-client-name">Алексей</p>#}
+{#                                        <p class="spec-profile-client-service">Сантехника</p>#}
+{#                                        <p class="spec-profile-client-review-text">#}
+{#                                            Don't you grow up in a hurry. Your mom'll be worried.#}
+{#                                            It was all part of the story. Even the scary nights.#}
+{#                                        </p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="spec-profile-review-item">#}
+{#                                    <div class="spec-profile-review-rating">#}
+{#                                        <div>#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">#}
+{#                                        </div>#}
+{#                                        <time>26 апреля 2023</time>#}
+{#                                    </div>#}
+{#                                    <div class="review-info">#}
+{#                                        <p class="spec-profile-client-name">Алексей</p>#}
+{#                                        <p class="spec-profile-client-service">Сантехника</p>#}
+{#                                        <p class="spec-profile-client-review-text">#}
+{#                                            Don't you grow up in a hurry. Your mom'll be worried.#}
+{#                                            It was all part of the story. Even the scary nights.#}
+{#                                        </p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <a href="">Показать все отзывы</a>#}
+{#                        </div>#}
+
+{#                    </main>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </main>#}
     <main class="user-profile-main">
         <div class="container">
             <div class="user-profile-content">
                 <aside class="spec-nav">
                     <nav class="user-nav">
                         <ul>
-                            <li><a href="{{ path('app_client_create_order') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
                             <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
-                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
                 </aside>
                 <div class="spec-profile-main-section">
                     <header>
-                        <div class="spec-profile-img">
-                            <img src="{{ asset('build/images/profile-placeholder.png') }}" alt="specialist profile picture">
+                        <div class="spec_profile_img">
+                            {#                            <img src="{{ asset('build/images/profile-placeholder.png') }}" alt="specialist profile picture">#}
+                            <img src="{{ asset('build/images/egor.f47ded4f.jpg') }}" alt="specialist profile picture">
                         </div>
                         <div class="spec-profile-header">
-                            <p class="spec-profile-name">{{ specialist.userId.email }}</p>
-{#                            <p class="spec-last-online">Last time online: 15 min ago</p>#}
+                            <h1>{{ specialist.userId.surname }} {{ specialist.userId.firstName }} {{ specialist.userId.patronymic }}</h1>
+                            {#                            <p class="spec-last-online">Last time online: 15 min ago</p>#}
                             <div class="spec-profile-rating-and-review">
                                 <div>
-                                    <img class="rating-star" src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating star icon">
-                                    <span>5,0</span>
+
+                                    {% if specialist.specialistRatings.count > 0 %}
+                                        {% set avgRating = 0 %}
+                                        {% for rating in specialist.specialistRatings %}
+                                            {% set avgRating = avgRating + rating.rating %}
+                                        {% endfor %}
+                                        <img class="rating-star" src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating star icon">
+                                        <span>{{ avgRating / specialist.specialistRatings.count }}</span>
+                                    {% else %}
+                                        <p>Нет отзывов</p>
+                                    {% endif %}
                                 </div>
                                 <div>
                                     <img src="{{ asset('build/images/review.77db3cb1.svg') }}" alt="reviews icon">
-                                    <a href="#"><span>33 отзыва</span></a>
+                                    <a href="#"><span>{{ specialist.specialistRatings.count }} Отзыв</span></a>
                                 </div>
                             </div>
                         </div>
                     </header>
                     <main class="spec-profile-main-section">
                         <div class="offer-button">
-{#                            <a href="{{ path('app_client_appoint_specialist', { orderId: order.id }) }}">Предложить заказ</a>#}
-{#                            <button type="button">Редактировать</button>#}
+                            {#                            <button type="button">Предложить заказ</button>#}
+{#                            <a href="{{ path('app_specialist_edit_profile') }}" class="order-cancel-btn">Редактировать профиль</a>#}
                         </div>
                         <div class="spec-profile-location">
                             <h2>Местоположение</h2>
                             <p>Москва</p>
                         </div>
+                        {% if specialist.education %}
+                            <div>
+                                <h2>Образование</h2>
+                                <p>{{ specialist.education }}</p>
+                            </div>
+                        {% endif %}
                         <div class="spec-profile-about-info">
                             <h2>О себе</h2>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Cumque illum magni quae? Alias aliquid animi commodi culpa cum debitis,
-                                distinctio esse eveniet, exercitationem, id itaque iusto nam odio quia voluptas.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Aperiam atque ducimus excepturi facilis pariatur placeat vel.
-                                At dolorem doloribus, ex ipsam magnam maxime minus mollitia, praesentium quae quasi, sequi suscipit?
+                                Уважаемые потенциальные клиенты, я беру только объемные заказы от 50 тыс.
+                                Выполняю Премиум работы только из качественных материалов — Германия, Италия, Россия.
+                                Делаю работы по сантехнике с нуля, проектирую систему водоподготовки. Предлагаю несколько вариантов работы на Ваш вкус.
+                                Помогаю с подбором материалов и сантехники. Задаю высокую планку работ, индивидуальный подход и позитивный настрой.
+                                Со мной ремонта можно не бояться, о чем говорят мои отзывы.
+                            </p><br>
+                            <p>
+                                Уважаемые потенциальные клиенты, я беру только объемные заказы.
+                                Выполняю премиум работы только из качественного материала- Германия, Италия, Россия.
+                                Опыт работы с 1999 года, наработки большие. Делаю проекты с нуля, новостройки, перепланировка сантехники во вторичном жилье. В анкете подробное портфолио.
+                                Помогаю с выбором и покупкой материалов.
+                                Так же оказываю услугу экспертного осмотра, установленных узлов коммуникаций, по качеству выполненных работ и материалам. Стоимость- 5 тыс.
+                                Оказываю выездные консультации по планировке и перепланировке сантехники в новостройках, составление сметы по материалам и работам. Стоимость 4 — 5 тыс.
                             </p>
                         </div>
                         <div class="spec-profile-experience">
                             <h2>Опыт работы</h2>
                             <ul>
-                                <li>Опыт работы с 2016</li>
-                                <li>На сервисе с 2021</li>
+                                <li>Опыт работы с 1999</li>
+                                <li>На сервисе с 2023</li>
                             </ul>
                         </div>
-                        {#                        <div class="spec-profile-portfolio">#}
-                        {#                            <h2>Портфолио <span>150</span> </h2>#}
-                        {#                            <p>Here suppose to be portfolio section</p>#}
-                        {#                        </div>#}
+                        <div class="spec-profile-portfolio">
+                            <header>
+                                <h2>Портфолио <span>{{ specialist.portfolios.count }}</span> </h2>
+{#                                <div>#}
+{#                                    <a href="{{ path('app_specialist_add_profile') }}"#}
+{#                                       class="portfolio_add_button">#}
+{#                                        Добавить#}
+{#                                        <img src="{{ asset('build/images/plus-alt.7c370fd4.svg') }}" alt="plus sign">#}
+{#                                    </a>#}
+{#                                </div>#}
+                            </header>
+
+                            <div class="row">
+                                {% if specialist.portfolios.count > 0 %}
+                                    {% for photo in specialist.portfolios %}
+                                        <div class="column">
+                                            <img alt="{{ photo.projectName }}"
+                                                 src="{{ asset(photo.imagePath) }}"
+                                                 onclick="openModal();currentSlide(1)"
+                                                 class="hover-shadow">
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div>
+                                        <p>У вас пока нет портфолио. Желаете добавить?</p>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
                         <div class="spec-profile-services">
-                            <h2>Услуги и цены</h2>
+                            <header>
+                                <h2>Услуги и цены</h2>
+{#                                <div>#}
+{#                                    <a href="{{ path('app_specialist_add_service') }}"#}
+{#                                       class="portfolio_add_button">#}
+{#                                        Добавить#}
+{#                                        <img src="{{ asset('build/images/plus-alt.7c370fd4.svg') }}" alt="plus sign">#}
+{#                                    </a>#}
+{#                                </div>#}
+                            </header>
+
                             <table class="spec-services-table">
                                 <tbody>
                                 <tr>
                                     <td><span>Сантехника</span></td>
                                 </tr>
                                 <tr>
-                                    <td class="item_name">Замена труб</td>
-                                    <td class="item_value">1500 рб/час</td>
+                                    <td class="item_name">Установка фильтра для воды</td>
+                                    <td class="item_value">3000 рб/шт.</td>
                                 </tr>
                                 <tr>
-                                    <td class="item_name">Замена труб</td>
-                                    <td class="item_value">1500 рб/час</td>
+                                    <td class="item_name">Демонтаж душевой кабины</td>
+                                    <td class="item_value">2000 рб/шт.</td>
                                 </tr>
                                 <tr>
-                                    <td class="item_name">Замена труб</td>
-                                    <td class="item_value">1500 рб/час</td>
+                                    <td class="item_name">Онлайн-консультация сантехника</td>
+                                    <td class="item_value">3000 рб/усл.</td>
                                 </tr>
                                 <tr>
-                                    <td><span>Плиточники</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="item_name">Укладка плитки на стену</td>
-                                    <td class="item_value">1500 рб/час</td>
-                                </tr>
-                                <tr>
-                                    <td class="item_name">Укладка плитки на пол</td>
-                                    <td class="item_value">1200 рб/час</td>
-                                </tr>
-                                <tr>
-                                    <td class="item_name">Демонтаж старой плитки</td>
-                                    <td class="item_value">2000 рб/час</td>
+                                    <td class="item_name">Демонтаж раковины</td>
+                                    <td class="item_value">1000 рб/шт.</td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="spec-profile-review">
                             <header>
-                                <h2>Отзывы <span>150</span></h2>
+                                <h2>Отзывы <span>{{ specialist.specialistRatings.count }}</span></h2>
                                 <div>
                                     <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                    <span>5,0</span>
+                                    {% if specialist.specialistRatings.count > 0 %}
+                                        <span>{{ avgRating / specialist.specialistRatings.count }}</span>
+                                    {% else %}
+                                        <span>{{ specialist.specialistRatings.count }}</span>
+                                    {% endif %}
                                 </div>
                             </header>
-                            <div class="spec-profile-review-list">
-                                <div class="spec-profile-review-item">
-                                    <div class="spec-profile-review-rating">
-                                        <div>
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
+
+                            {% if specialist.specialistRatings.count > 0 %}
+
+                                <div class="spec-profile-review-list">
+                                    {% for rating in specialist.specialistRatings %}
+                                        <div class="spec-profile-review-item">
+                                            <div class="spec-profile-review-rating">
+                                                <div>
+                                                    {% for i in 1..5 %}
+                                                        {% if rating.rating >= i %}
+                                                            <img src="{{ asset('build/images/rating_star_gold.6712d83b.svg') }}" alt="rating icon">
+                                                        {% else %}
+                                                            <img src="{{ asset('build/images/rating_star_no_color.156f75e2.svg') }}" alt="rating icon">
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <time>{{ rating.createdAt|date('d-m-Y') }}</time>
+                                            </div>
+                                            <div class="review-info">
+                                                <p class="spec-profile-client-name">{{ rating.client.userId.email }}</p>
+                                                <p class="spec-profile-client-service">Сантехника</p>
+                                                <p class="spec-profile-client-review-text">
+                                                    {{ rating.ratingText }}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <time>26 апреля 2023</time>
-                                    </div>
-                                    <div class="review-info">
-                                        <p class="spec-profile-client-name">Алексей</p>
-                                        <p class="spec-profile-client-service">Сантехника</p>
-                                        <p class="spec-profile-client-review-text">
-                                            Don't you grow up in a hurry. Your mom'll be worried.
-                                            It was all part of the story. Even the scary nights.
-                                        </p>
-                                    </div>
+                                    {% endfor %}
+                                    <a href="">Показать все отзывы</a>
                                 </div>
-                                <div class="spec-profile-review-item">
-                                    <div class="spec-profile-review-rating">
-                                        <div>
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                        </div>
-                                        <time>26 апреля 2023</time>
-                                    </div>
-                                    <div class="review-info">
-                                        <p class="spec-profile-client-name">Алексей</p>
-                                        <p class="spec-profile-client-service">Сантехника</p>
-                                        <p class="spec-profile-client-review-text">
-                                            Don't you grow up in a hurry. Your mom'll be worried.
-                                            It was all part of the story. Even the scary nights.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="spec-profile-review-item">
-                                    <div class="spec-profile-review-rating">
-                                        <div>
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                            <img src="{{ asset('build/images/rating_star.edf777aa.svg') }}" alt="rating icon">
-                                        </div>
-                                        <time>26 апреля 2023</time>
-                                    </div>
-                                    <div class="review-info">
-                                        <p class="spec-profile-client-name">Алексей</p>
-                                        <p class="spec-profile-client-service">Сантехника</p>
-                                        <p class="spec-profile-client-review-text">
-                                            Don't you grow up in a hurry. Your mom'll be worried.
-                                            It was all part of the story. Even the scary nights.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="">Показать все отзывы</a>
-                        </div>
+
+                            {% else %}
+                                <p>У вас пока нет отзывов. Выполняйте заказы и просите клиентов оставлять отзывы на вашу работу.</p>
+                            {% endif %}
 
                     </main>
                 </div>

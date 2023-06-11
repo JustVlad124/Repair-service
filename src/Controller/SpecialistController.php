@@ -6,10 +6,15 @@ use App\Entity\ClientOffer;
 use App\Entity\Order;
 use App\Entity\OrderState;
 use App\Entity\Portfolio;
+use App\Entity\Service;
 use App\Entity\Specialist;
 use App\Entity\SpecialistRespond;
 use App\Entity\User;
+use App\Form\AddressTypeFormType;
 use App\Form\PortfolioFormType;
+use App\Form\RegistrationFormType;
+use App\Form\ServiceFormType;
+use App\Form\SpecialistFormType;
 use App\Repository\SpecialistRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
@@ -81,7 +86,7 @@ class SpecialistController extends AbstractController
 
         // Создаю уловие для выборки данных из БД
         // Запрашиваю все записи, у которых orderState не STATE_ARCHIVE
-        $notAppointedOrders = $orderRepository->findByNotAppointedSpecialists(1);
+        $notAppointedOrders = $orderRepository->findNotAppointedOrders(1, );
 
 //        $specificOrders = array_merge($notAppointedOrders, $appointedOrders);
 
@@ -163,6 +168,77 @@ class SpecialistController extends AbstractController
         return $this->render('specialist/add_portfolio.html.twig', [
             'specialist' => $specialist,
             'portfolioForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/specialist/add_service', name: 'app_specialist_add_service')]
+    public function addSpecialistService(Request $request): Response
+    {
+        $service = new Service();
+        $form = $this->createForm(ServiceFormType::class, $service);
+        $form->handleRequest($request);
+
+//        if ($form->isSubmitted() && $form->isValid()) {
+//
+//        }
+
+        return $this->render('specialist/add_spec_service.html.twig', [
+            'serviceForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/specialist/edit_profile', name: 'app_specialist_edit_profile')]
+    public function editProfile(Request $request): Response
+    {
+        $specialist = $this->getCurrentSpecialist();
+        $form = $this->createForm(SpecialistFormType::class, $specialist);
+        $form->handleRequest($request);
+
+        // ДОКОНЧИТЬ ПОЗЖЕ
+
+//        if ($form->isSubmitted() && $form->isValid()) {
+//
+//        }
+
+        return $this->render('specialist/edit_profile.html.twig', [
+            'profileForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/specialist/user_settings', name: 'app_specialist_user_settings')]
+    public function userSettings(): Response
+    {
+        $userInfo = $this->getCurrentSpecialist();
+
+        return $this->render('specialist/user_settings.html.twig', [
+            'user' => $userInfo,
+        ]);
+    }
+
+    #[Route('/specialist/edit_user_settings', name: 'app_specialist_edit_user_settings')]
+    public function editUserSettings(Request $request): Response
+    {
+        $user = $this->getCurrentSpecialist();
+
+        $userForm = $this->createForm(RegistrationFormType::class, $user->getUserId());
+        $userAddress = $this->createForm(AddressTypeFormType::class, $user->getUserId()->getAddresses()[0]);
+
+        $userForm->handleRequest($request);
+        $userAddress->handleRequest($request);
+
+        // ДОКОНЧИТЬ КАК БУДЕТ ВРЕМЯ
+
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            if (! $userForm->get('plainPassword')->getData()) {
+                dd('Nice');
+            }
+        }
+
+        // КОНЕЦ ТОГО ЧТО НАДО ДООКОНчИТЬ
+
+        return $this->render('specialist/edit_user_settings.html.twig', [
+            'userForm' => $userForm,
+            'userAddressForm' => $userAddress,
         ]);
     }
 

@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside class="spec-nav">
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_specialist_user_settings') }}">Настройки</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="profile_edit_main">
+                    <h1>Персональные данные</h1>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Имя:</td>
+                                <td>{{ user.userId.firstName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Фамилия:</td>
+                                <td>{{ user.userId.surname }}</td>
+                            </tr>
+                            <tr>
+                                <td>Отчество:</td>
+                                <td>{{ user.userId.patronymic }}</td>
+                            </tr>
+                            <tr>
+                                <td>Номер телефона:</td>
+                                <td>{{ user.userId.phoneNumber }}</td>
+                            </tr>
+                            <tr>
+                                <td>email:</td>
+                                <td>{{ user.userId.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h1>Адрес проживания клиента</h1>
+                    <table>
+                        <tbody>
+                            {% for address in user.userId.addresses %}
+                                <tr>
+                                    <td>Субъект РФ</td>
+                                    <td>{{ address.countrySubject }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Населенный пункт</td>
+                                    <td>{{ address.city }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Улица</td>
+                                    <td>{{ address.street }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Дом</td>
+                                    <td>{{ address.number }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_specialist_edit_user_settings') }}"
+                       class="order-cancel-btn"
+                    >
+                        Редактировать
+                    </a>
+
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}

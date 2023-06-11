@@ -44,16 +44,17 @@ class ClientController extends AbstractController
     public function orders(): Response
     {
         $orderStateRepository = $this->entityManager->getRepository(OrderState::class);
+        $client = $this->getCurrentClient();
 
         $inPendingStateId = $orderStateRepository->findOneBy(['stateName' => 'STATE_IN_PENDING'])->getId();
         $inProgressStateId = $orderStateRepository->findOneBy(['stateName' => 'STATE_IN_PROGRESS'])->getId();
         $archivedStateId = $orderStateRepository->findOneBy(['stateName' => 'STATE_ARCHIVE'])->getId();
 
-        $notAppointedOrders = $this->orderRepository->findByNotAppointedSpecialists($inPendingStateId);
+        $notAppointedOrders = $this->orderRepository->findByNotAppointedSpecialists($inPendingStateId, $client->getId());
 
-        $appointedOrders = $this->orderRepository->findByAppointedSpecialist($inProgressStateId);
+        $appointedOrders = $this->orderRepository->findByAppointedSpecialist($inProgressStateId, $client->getId());
 
-        $archivedOrders = $this->orderRepository->findByArchivedOrders($archivedStateId);
+        $archivedOrders = $this->orderRepository->findByArchivedOrders($archivedStateId, $client->getId());
 
         return $this->render('client/orders.html.twig', [
             'notAppointedOrders' => $notAppointedOrders,
@@ -114,6 +115,8 @@ class ClientController extends AbstractController
             $orderState = $this->entityManager->getRepository(OrderState::class)->findOneBy(['stateName' => 'STATE_IN_PENDING']);
 
             $order->setOrderState($orderState);
+            $order->setCreatedAt(new \DateTimeImmutable('now'));
+            $order->setUpdatedAt(new \DateTimeImmutable('now'));
 
             $this->entityManager->persist($order);
             $this->entityManager->flush();
@@ -246,10 +249,20 @@ class ClientController extends AbstractController
         $offerRepository = $this->entityManager->getRepository(ClientOffer::class);
         $respondRepository = $this->entityManager->getRepository(SpecialistRespond::class);
 
+        $relatedSpecialists = [];
+
         $relatedOffersByClient = $offerRepository->findBy(['order' => $order, 'client' => $client]);
         $relatedRespondsBySpec = $respondRepository->findBy(['order' => $order]);
 
-        $relatedSpecialists = array_merge($relatedOffersByClient, $relatedRespondsBySpec);
+        $relatedSpecialists = array_merge($relatedSpecialists, $relatedOffersByClient);
+
+        foreach ($relatedRespondsBySpec as $respond) {
+            foreach ($relatedOffersByClient as $offer) {
+                if ($respond->getOrderId() !== $offer->getOrder()) {
+                    $relatedSpecialists[] = $respond;
+                }
+            }
+        }
 
         return $this->render('client/related_specialists.html.twig', [
             'order' => $order,

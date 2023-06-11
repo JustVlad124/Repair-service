@@ -11,7 +11,7 @@
                         <ul>
                             <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
                             <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
-                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -58,7 +58,9 @@
                                         <a href="{{ path('app_client_specialist_profile', { id: order.specialist.id }) }}"
                                            class="client_link_to_spec"
                                         >
-                                            {{ order.specialist.userId.email }}
+                                            {{ order.specialist.userId.surname }}
+                                            {{ order.specialist.userId.firstName }}
+                                            {{ order.specialist.userId.patronymic }}
                                         </a>
                                     </div>
                                     <div class="order-tab-button-section">
@@ -88,7 +90,9 @@
                                         <a href="{{ path('app_client_specialist_profile', { id: order.specialist.id }) }}"
                                            class="client_link_to_spec"
                                         >
-                                            {{ order.specialist.userId.email }}
+                                            {{ order.specialist.userId.surname }}
+                                            {{ order.specialist.userId.firstName }}
+                                            {{ order.specialist.userId.patronymic }}
                                         </a>
                                     </div>
                                     <div>

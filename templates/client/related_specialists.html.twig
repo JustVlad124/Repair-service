@@ -9,7 +9,7 @@
                         <ul>
                             <li><a href="{{ path('app_client_show_order', { id: order.id}) }}">Мой заказ</a></li>
                             <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
-                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -26,12 +26,14 @@
                             <div class="related_spec_item">
                                 <div class="spec_name">
                                     <a href="{{ path('app_client_specialist_profile', { id: relatedSpecialist.specialist.id }) }}">
-                                        {{ relatedSpecialist.specialist.userId.email }}
+                                        {{ relatedSpecialist.specialist.userId.surname }}
+                                        {{ relatedSpecialist.specialist.userId.firstName }}
+                                        {{ relatedSpecialist.specialist.userId.patronymic }}
                                     </a>
                                 </div>
                                 <div>
                                     <p class="spec_order_mode">Выбранный вами или отклик</p>
-                                    <p class="spec_contact_info">Контактные данные: <span>+7 (999) 999 99-99</span></p>
+                                    <p class="spec_contact_info">Контактные данные: <span>{{ relatedSpecialist.specialist.userId.phoneNumber }}</span></p>
                                 </div>
                                 <div>
 {#                                    <form action="{{ path('app_client_related_specialists', { id: order.id }) }}" method="post">#}

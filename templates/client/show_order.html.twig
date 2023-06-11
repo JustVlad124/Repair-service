@@ -11,7 +11,7 @@
                         <ul>
                             <li><a href="{{ path('app_client_create_order') }}">Новый заказ</a></li>
                             <li><a href="{{ path('app_client_homepage') }}">Мои заказы</a></li>
-                            <li><a href="{{ path('app_client_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_client_profile') }}">Настройки</a></li>
                             <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
                         </ul>
                     </nav>
@@ -21,7 +21,7 @@
                         <h1>Мой заказ</h1>
                         <div>
                             <p>Номер заказа: №{{ order.id }}</p>
-                            <p>Дата создания заказа: 22.04.2023</p>
+                            <p>Дата создания заказа: {{ order.createdAt|date('d.m.Y') }}</p>
                         </div>
                     </header>
                     <main class="order-main-info">
@@ -30,8 +30,8 @@
                         <h2>Услуги</h2>
                         <section class="order-main-info-service">
                             <h3>Сантехника</h3>
-                            <ul>
-                                <li>Установка или замена сантехники</li>
+                            <ul style="list-style: none">
+                                <li>Прочистка канализации</li>
                                 {#                                <li>Услуга №2</li>#}
                                 {#                                <li>Услуга №3</li>#}
                             </ul>
@@ -39,16 +39,13 @@
                         <h2>Где будут проводиться работы?</h2>
                         <p>Московская обл., Москва, Никольская 7, кв. 12</p>
                         <h2>Когда будет удобно начать работу?</h2>
-                        <p>22.04.2023</p>
+                        <p>14.06.2023</p>
                         <h2>Детали заказа</h2>
                         <p>
-                            Нужно заменить трубу под ванной.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Aliquam ducimus fugit iste magni minima modi nemo officia perferendis ratione reiciendis,
-                            repellendus repudiandae sequi ullam voluptate voluptatem! Dolorum maiores obcaecati repellat.
+                            {{ order.description }}
                         </p>
                         <h2>Ожидаемая стоимость</h2>
-                        <p>3000 руб.</p>
+                        <p>{{ order.cost }} руб.</p>
                     </main>
                     <footer>
                         <a href="{{ path('app_client_delete_order', {'id': order.id }) }}" class="delete_order_btn">Отменить заказ</a>

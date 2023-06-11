@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="user-profile-main">
+        <div class="container">
+            <div class="user-profile-content">
+                <aside class="spec-nav">
+                    <nav class="user-nav">
+                        <ul>
+                            <li><a href="{{ path('app_specialist_available_orders') }}">Новые заказы</a></li>
+                            <li><a href="{{ path('app_specialist_homepage') }}">Мои заказы</a></li>
+                            <li><a href="{{ path('app_specialist_profile') }}">Профиль</a></li>
+                            <li><a href="{{ path('app_specialist_user_settings') }}">Настройки</a></li>
+                            <li><a class="logout" href="{{ path('app_logout') }}">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="profile_edit_main">
+                    <h1>Настройки</h1>
+                    {{ form_start(userForm) }}
+                        <h2>Персональные данные</h2>
+                        <div>
+                            {{ form_row(userForm.firstName) }}
+                        </div>
+                        <div>
+                            {{ form_row(userForm.surname) }}
+                        </div>
+                        <div>
+                            {{ form_row(userForm.patronymic) }}
+                        </div>
+                        <div>
+                            {{ form_row(userForm.phoneNumber, { 'attr': { 'class': 'phone_input' } }) }}
+                        </div>
+                        <div>
+                            {{ form_row(userForm.email) }}
+                        </div>
+                        <div>
+                            {{ form_row(userForm.plainPassword, { 'required': false }) }}
+                        </div>
+
+                        {{ form_row(userForm.roles, { 'attr': { 'style': 'display: none' }, 'label': false }) }}
+
+                        <div class="spec_profile_address">
+                            <h2>Адрес проживания пользователя</h2>
+                            {{ form_start(userAddressForm) }}
+                                <div>
+                                    {{ form_row(userAddressForm.countrySubject) }}
+                                </div>
+                                <div>
+                                    {{ form_row(userAddressForm.city) }}
+                                </div>
+                                <div>
+                                    {{ form_row(userAddressForm.street) }}
+                                </div>
+                                <div>
+                                    {{ form_row(userAddressForm.number) }}
+                                </div>
+                            {{ form_end(userAddressForm) }}
+                        </div>
+
+                        <button type="submit" class="order-cancel-btn">
+                            Сохранить
+                        </button>
+
+                    {{ form_end(userForm) }}
+                </main>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const inputElement = document.querySelector('.phone_input') // ищем наш единственный input
+            const maskOptions = { // создаем объект параметров
+                mask: '+{7} (000) 000-00-00' // задаем единственный параметр mask
+            }
+            IMask(inputElement, maskOptions) // запускаем плагин с переданными параметрами
+        })
+    </script>
+{% endblock %}

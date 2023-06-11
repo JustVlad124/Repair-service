@@ -50,6 +50,9 @@ class RegistrationController extends AbstractController
                 $entityManager->persist($specialist);
             }
 
+            $user->setCreatedAt(new \DateTimeImmutable('now'));
+            $user->setUpdatedAt(new \DateTimeImmutable('now'));
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
